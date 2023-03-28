@@ -3,10 +3,11 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "start": "node index.js",
+    "test": "mocha test/index.test.js --exit",
+    "system-test": "NAME=Cloud mocha test/system.test.js --timeout=180000"
   },
   "private": true,
   "dependencies": {
