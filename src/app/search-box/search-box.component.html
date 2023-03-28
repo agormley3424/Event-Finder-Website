@@ -1,0 +1,56 @@
+<div id="searchBox" class="container">
+  <h1>
+    Events Search
+  </h1>
+  <form>
+    <div class="row mt-3">
+      <div class="form-group">
+        <label for="keyword-input" class="form-label">Keyword<span class="asterisk">*</span></label>
+        <input type="text" id="keyword-input" class="form-control">
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="form-group col-md-6">
+        <label for="distance-input" class="form-label" placeholder="10">Distance</label>
+        <input type="text" id="distance-input" class="form-control">
+      </div>
+      <div class="form-group col-md-5">
+        <label for="category-input" class="form-label">Category<span class="asterisk">*</span></label>
+        <select id="category-input" class="form-control">
+          <option value="default">Default</option>
+          <option value="music">Music</option>
+          <option value="sports">Sports</option>
+          <option value="artstheatre">Arts & Theatre</option>
+          <option value="film">Film</option>
+          <option value="misc">Miscellaneous</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="row mt-3">
+      <div class="form-group">
+        <label for="location-input" class="form-label">Location<span class="asterisk">*</span></label>
+        <input type="text" id="location-input" class="form-control">
+      </div>
+    </div>
+    
+
+    <div class="form-check mt-3">
+      <input type="checkbox" id="auto-input" class="form-check-input">
+      <label for="auto-input" class="form-check-label">Auto-detect your location<span class="asterisk">*</span></label>
+    </div>
+
+    <div class="container d-flex justify-content-center">
+      <div class="row mt-3">
+        <div class="col">
+          <button type="submit" class="btn btn-danger">SUBMIT</button>
+        </div>
+        <div class="col">
+          <button class="btn btn-primary">CLEAR</button>
+        </div>
+      </div>
+    </div>
+
+  </form>
+</div>
