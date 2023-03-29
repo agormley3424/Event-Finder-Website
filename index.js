@@ -12,60 +12,75 @@ app.use("/favorites", express.static(__dirname + '/dist/my-app'));
 
 app.use("/search", express.static(__dirname + '/dist/my-app'));
 
+var response = null;
+
 // Instantiate Spotify Wrapper
-// const client_id = '0071111b9ea94493898caee6d25a95e4';
-// const client_secret = 'e02e456718dc4029a7ccc17c53766917';
+ const client_id = '0071111b9ea94493898caee6d25a95e4';
+ const client_secret = 'e02e456718dc4029a7ccc17c53766917';
 
 
 
-// var SpotifyWebApi = require('spotify-web-api-node');
+ var SpotifyWebApi = require('spotify-web-api-node');
 
-// // credentials are optional
-// var spotifyApi = new SpotifyWebApi({
-//   clientId: client_id,
-//   clientSecret: client_secret,
-//   redirectUri: 'https://hw8-380107.wl.r.appspot.com/json'
-// });
+// credentials are optional
+var spotifyApi = new SpotifyWebApi({
+  clientId: client_id,
+  clientSecret: client_secret,
+  redirectUri: 'https://hw8-380107.wl.r.appspot.com/json'
+});
 
-// void refreshToken()
+function refreshToken()
+{
+  // Retrieve an access token.
+  spotifyApi.clientCredentialsGrant().then(
+    function(data) {
+      console.log('The access token expires in ' + data.body['expires_in']);
+      console.log('The access token is ' + data.body['access_token']);
+
+      // Save the access token so that it's used in future calls
+      spotifyApi.setAccessToken(data.body['access_token']);
+    },
+    function(err) {
+      console.log('Something went wrong when retrieving an access token', err);
+    }
+  );
+}
+
+//refreshToken();
+
+
+function searchArtist(artistName)
+{
+  refreshToken();
+  spotifyApi.searchArtists(artistName)
+  //.then(callBack(data), callBack(err));
+  .then(function(data) {
+    console.log("Artist search successful, printing JSON");
+    console.log(data.body);
+    response = data.body;
+  }, function(err) {
+    console.log("Artist search unsuccessful, printing error:");
+    console.error(err);
+    response = err;
+  });
+}
+
+// function processSpotify(returnVal)
 // {
-//   // Retrieve an access token.
-//   spotifyApi.clientCredentialsGrant().then(
-//     function(data) {
-//       console.log('The access token expires in ' + data.body['expires_in']);
-//       console.log('The access token is ' + data.body['access_token']);
-
-//       // Save the access token so that it's used in future calls
-//       spotifyApi.setAccessToken(data.body['access_token']);
-//     },
-//     function(err) {
-//       console.log('Something went wrong when retrieving an access token', err);
-//     }
-//   );
+//   response = returnVal;
 // }
 
-// refreshToken();
+//searchArtist("Cher", () => {});
 
 
-// void searchArtist(artistName, callback)
-// {
-//   spotifyApi.searchArtists('Love')
-//   .then(function(data) {
-//     console.log("Artist search successful, printing JSON");
-//     console.log(data.body);
-//   }, function(err) {
-//     console.log("Artist search unsuccessful, printing error:");
-//     console.error(err);
-//   });
-// }
-
-// searchArtist("Cher", () => {});
-
-
-// app.get('/', (req, res) => { 
-//   //res.sendFile("Angular/my-app/src/app/app.component.html", {root:__dirname});
-//   res.sendFile("dist/my-app", {root:__dirname});
-// }); 
+app.get('/spotify', (req, res) => { 
+  //res.sendFile("Angular/my-app/src/app/app.component.html", {root:__dirname});
+  //res.sendFile("dist/my-app", {root:__dirname});
+  searchArtist("Cher");
+  console.log("Response is " + response);
+  res.json(response);
+  //res.json({"foo": "bar"});
+}); 
 
 // app.get('/*', (req,res) => {
 //   res.sendFile(__dirname + '/dist/my-app');
