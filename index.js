@@ -46,10 +46,10 @@ function refreshToken()
   );
 }
 
-//refreshToken();
+refreshToken();
 
 
-function searchArtist(artistName)
+function searchArtist(artistName, req, res)
 {
   refreshToken();
   spotifyApi.searchArtists(artistName)
@@ -57,11 +57,13 @@ function searchArtist(artistName)
   .then(function(data) {
     console.log("Artist search successful, printing JSON");
     console.log(data.body);
-    response = data.body;
+    //response = data.body;
+    res.json(data.body);
   }, function(err) {
     console.log("Artist search unsuccessful, printing error:");
     console.error(err);
-    response = err;
+    //response = err;
+    res.json(err);
   });
 }
 
@@ -76,9 +78,11 @@ function searchArtist(artistName)
 app.get('/spotify', (req, res) => { 
   //res.sendFile("Angular/my-app/src/app/app.component.html", {root:__dirname});
   //res.sendFile("dist/my-app", {root:__dirname});
-  searchArtist("Cher");
-  console.log("Response is " + response);
-  res.json(response);
+  
+
+  searchArtist(req.query.artist, req, res);
+  //console.log("Response is " + response);
+  //res.json(response);
   //res.json({"foo": "bar"});
 }); 
 
