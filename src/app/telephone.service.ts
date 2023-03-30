@@ -106,4 +106,33 @@ export class TelephoneService {
   {
     TelephoneService.ticketMasterJSON = null;
   }
+
+  public static getSpotify(artist: string, http: HttpClient, caller: SearchBoxComponent)
+  {
+    //console.log("enter getSpotify");
+    const stringDest= "https://hw8-380107.wl.r.appspot.com/spotify?artist=" + artist;
+
+    http.get(stringDest)
+    .subscribe((response) => {
+      //console.log(TelephoneService.responseToJSON(response));
+      TelephoneService.spotifyJSON = TelephoneService.responseToJSON(response);
+      //console.log(TelephoneService.spotifyJSON);
+      
+      //console.log(this.spotifyJSON["artists"]["items"]);
+      //console.log("Artist is " + artist);
+      for (let i = 0; i < this.spotifyJSON["artists"]["items"].length; i++)
+      {
+        //console.log(this.spotifyJSON["artists"]["items"][i]["name"]);
+        if (this.spotifyJSON["artists"]["items"][i]["name"] == artist)
+        {
+          caller.spotifyResult.push(TelephoneService.spotifyJSON["artists"]["items"][i]);
+          //console.log("Matching search is " + TelephoneService.spotifyJSON["artists"]["items"][i]["name"]);
+          
+          break;
+        }
+      }
+      
+      //console.log(caller.spotifyResult);
+    })
+  }
 }

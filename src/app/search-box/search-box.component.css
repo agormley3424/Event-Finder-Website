@@ -11,3 +11,23 @@ td img {
   height:50px;
   object-fit:cover;
 }
+
+h2 {
+  text-align:center;
+}
+
+#heartButton {
+  max-width: 45px;
+}
+
+.col-3 {
+  text-align:center;
+}
+
+.col-4 {
+  text-align:center;
+}
+
+img {
+  max-width:100%;
+}

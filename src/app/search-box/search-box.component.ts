@@ -20,6 +20,7 @@ export class SearchBoxComponent {
   // searchForm.get("autoDetect").value
 
   public searchResults: any = [];
+  public spotifyResult: any = [];
 
   public detailBool = false;
 
@@ -159,6 +160,17 @@ export class SearchBoxComponent {
     {
       this.hasPriceRange = false;
     }
+    //console.log(this.detailRow['_embedded']['attractions'][0]);
+
+    this.spotifyResult.clear();
+    for (let i = 0; i < this.detailRow['_embedded']['attractions'].length; i++)
+    {
+      const artist = this.detailRow['_embedded']['attractions'][i]['name'];
+      //console.log("Artist is " + artist);
+      TelephoneService.getSpotify(artist, this.phone.http, this);
+    }
+
+    console.log(this.spotifyResult);
   }
 
   // hideLocation(): void {
