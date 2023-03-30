@@ -13,6 +13,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTabsModule } from "@angular/material/tabs";
 import { SearchPageComponent } from './search-page/search-page.component';
 import { FavoritePageComponent } from './favorite-page/favorite-page.component';
+import { HttpClientModule } from "@angular/common/http";
+
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { FavoritePageComponent } from './favorite-page/favorite-page.component';
     AppRoutingModule,
     NgbModule,
     BrowserAnimationsModule,
-    MatTabsModule
+    MatTabsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
