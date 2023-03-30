@@ -244,7 +244,10 @@
                 <br>
                 <div class="row">
                   <div class="col-2 border d-flex justify-content-center">
-                    <img src="../assets/test-img.png">
+                    <figure class="figure">
+                      <img [src]="artist['images'][0]['url']" class="figure-img img-fluid rounded">
+                      <figcaption class="figure-caption">{{artist['name']}}</figcaption>
+                    </figure>
           
                   </div>
                   <br>
@@ -262,13 +265,13 @@
                     </div>
                     <div class="row align-items-center">
                       <div class="col-4 border">
-                        (Popularity)
+                        {{artist['popularity']}}
                       </div>
                       <div class="col-4 border">
-                        (Followers)
+                        {{artist['followers']['total']}}
                       </div>
                       <div class="col-4 border">
-                        (Spotify Link)
+                        <a [href]="artist['external_urls']['spotify']">Icon here</a>
                       </div>
                     </div>
                   </div>

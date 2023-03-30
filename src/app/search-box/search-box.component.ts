@@ -162,7 +162,7 @@ export class SearchBoxComponent {
     }
     //console.log(this.detailRow['_embedded']['attractions'][0]);
 
-    this.spotifyResult.clear();
+    this.spotifyResult = [];
     for (let i = 0; i < this.detailRow['_embedded']['attractions'].length; i++)
     {
       const artist = this.detailRow['_embedded']['attractions'][i]['name'];
