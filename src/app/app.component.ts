@@ -17,24 +17,24 @@ export class AppComponent {
   }
 
   testFunc(): void {
-    this.setIP();
-    console.log("IP set as " + TelephoneService.ip);
+    // this.setIP();
+    // console.log("IP set as " + TelephoneService.ip);
     //this.setTicketMasterAuto();
   }
 
-  setIP(): void {
-    TelephoneService.autoLocationOn(this.phone.http);
-  }
+  // setIP(): void {
+  //   TelephoneService.autoLocationOn(this.phone.http);
+  // }
 
-  unSetIP(): void {
-    TelephoneService.autoLocationOff();
-  }
+  // unSetIP(): void {
+  //   TelephoneService.autoLocationOff();
+  // }
 
-  setTicketMasterAuto(): void {
-    TelephoneService.ticketMasterAuto("concerts", 50, "music", this.phone.http);
-  }
+  // setTicketMasterAuto(): void {
+  //   TelephoneService.ticketMasterAuto("concerts", 50, "music", this.phone.http);
+  // }
 
-  setTicketMasterManual(): void {
-    TelephoneService.ticketMasterManual("concerts", 50, "music", TelephoneService.ip, this.phone.http);
-  }
+  // setTicketMasterManual(): void {
+  //   TelephoneService.ticketMasterManual("concerts", 50, "music", TelephoneService.ip, this.phone.http);
+  // }
 }

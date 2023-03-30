@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
+import { SearchBoxComponent } from "./search-box/search-box.component";
+
 
 @Injectable({
   providedIn: 'root'
@@ -51,6 +53,7 @@ export class TelephoneService {
       console.log(TelephoneService.responseToJSON(response)["loc"]);
 
       TelephoneService.ip = TelephoneService.responseToJSON(response)["loc"];
+      console.log(TelephoneService.ip);
     })
   }
 
@@ -58,7 +61,7 @@ export class TelephoneService {
     TelephoneService.ip = null;
   }
 
-  public static ticketMasterAuto(keyword: string, distance: number, category: string, http: HttpClient): void {
+  public static ticketMasterAuto(keyword: string, distance: number, category: string, http: HttpClient, caller: SearchBoxComponent): void {
     if (TelephoneService.ip == null)
     {
       console.log("TelephoneService ticketMasterAuto Error: No ip is defined");
@@ -71,14 +74,18 @@ export class TelephoneService {
     stringDest += "&location=" + TelephoneService.ip;
     stringDest += "&locationSearch=false";
 
+    //console.log(stringDest);
+
     http.get(stringDest)
     .subscribe((response) => {
-      console.log(TelephoneService.responseToJSON(response));
+      //console.log(TelephoneService.responseToJSON(response));
       TelephoneService.ticketMasterJSON = TelephoneService.responseToJSON(response);
+      caller.searchResults = TelephoneService.ticketMasterJSON["_embedded"]["events"];
+      console.log(caller.searchResults);
     })
   }
 
-  public static ticketMasterManual(keyword: string, distance: number, category: string, location: string, http: HttpClient): void {
+  public static ticketMasterManual(keyword: string, distance: number, category: string, location: string, http: HttpClient,  caller: SearchBoxComponent): void {
     let stringDest= "https://hw8-380107.wl.r.appspot.com/ticketMaster?";
     stringDest += "keyword=" + keyword;
     stringDest += "&distance=" + distance.toString();
@@ -88,8 +95,10 @@ export class TelephoneService {
 
     http.get(stringDest)
     .subscribe((response) => {
-      console.log(TelephoneService.responseToJSON(response));
+      //console.log(TelephoneService.responseToJSON(response));
       TelephoneService.ticketMasterJSON = TelephoneService.responseToJSON(response);
+      caller.searchResults = TelephoneService.ticketMasterJSON["_embedded"]["events"];
+      console.log(caller.searchResults);
     })
   }
 

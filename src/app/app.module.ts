@@ -14,6 +14,7 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { SearchPageComponent } from './search-page/search-page.component';
 import { FavoritePageComponent } from './favorite-page/favorite-page.component';
 import { HttpClientModule } from "@angular/common/http";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -32,7 +33,9 @@ import { HttpClientModule } from "@angular/common/http";
     NgbModule,
     BrowserAnimationsModule,
     MatTabsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
