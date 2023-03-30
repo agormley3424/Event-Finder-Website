@@ -16,6 +16,8 @@ export class SearchBoxComponent {
     autoDetect: new FormControl(false)
   })
 
+  // searchForm.get("autoDetect").value
+
   public searchResults: any = null;
   //public autoDetect = false;
 
@@ -33,6 +35,10 @@ export class SearchBoxComponent {
     //this.setTicketMasterManual();
   }
 
+  // clear(): void {
+  //   this.searchForm.resetForm();
+  // }
+
   setIP(): void {
     TelephoneService.autoLocationOn(this.phone.http);
   }
@@ -45,6 +51,8 @@ export class SearchBoxComponent {
     const keyword: string = this.searchForm.get("keyword").value;
     const distance: number = this.searchForm.get("distance").value;
     const category: string = this.searchForm.get("category").value;
+
+    this.searchForm.get("autoDetect").value;
 
     TelephoneService.ticketMasterAuto(keyword, distance, category, this.phone.http, this);
     //console.log(this.searchResults);
@@ -73,4 +81,8 @@ export class SearchBoxComponent {
     //console.log(this.searchResults);
     //this.searchResults = TelephoneService.ticketMasterJSON["_Embedded"]["events"];
   }
+
+  // hideLocation(): void {
+  //   this.searchForm.get("location").
+  // }
 }
