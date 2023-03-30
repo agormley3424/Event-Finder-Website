@@ -18,7 +18,7 @@ export class SearchBoxComponent {
 
   // searchForm.get("autoDetect").value
 
-  public searchResults: any = null;
+  public searchResults: any = [];
   //public autoDetect = false;
 
   constructor(private phone: TelephoneService) {}
@@ -40,6 +40,7 @@ export class SearchBoxComponent {
   // }
 
   setIP(): void {
+    //console.log("Calling setIP");
     TelephoneService.autoLocationOn(this.phone.http);
   }
 
