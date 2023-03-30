@@ -33,6 +33,10 @@ export class SearchBoxComponent {
     //this.setTicketMasterAuto();
 
     //this.setTicketMasterManual();
+
+    console.log(this.searchResults);
+    console.log(this.searchResults[0]['dates']['start']['localDate']);
+    console.log(this.searchResults[0]['dates']['start']['localTime']);
   }
 
   // clear(): void {

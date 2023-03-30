@@ -62,6 +62,9 @@
         <div class="col">
           <button type="reset" class="btn btn-primary" (click)="testFuncIP()">CLEAR</button>
         </div>
+        <div class="col">
+          <button type="button" class="btn" (click)="testFunc()">TEST</button>
+        </div>
       </div>
     </div>
 
@@ -78,11 +81,11 @@
         <th >Genre</th>
         <th >Venue</th>
       </tr>
-      <ng-template *ngFor="let row of searchResults">
+      <ng-container *ngFor="let row of searchResults">
         <tr>
-          <td [innerHTML]="row['dates']['start']['localDate'] + '\n' + row['dates']['start']['localTime']"></td>
+          <td>{{row['dates']['start']['localDate']}} <br> {{row['dates']['start']['localTime']}}</td>
         </tr>
-      </ng-template>
+      </ng-container>
     </thead>
   </table>
 </div>
