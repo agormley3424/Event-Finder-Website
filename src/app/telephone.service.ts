@@ -74,7 +74,7 @@ export class TelephoneService {
     stringDest += "&location=" + TelephoneService.ip;
     stringDest += "&locationSearch=false";
 
-    //console.log(stringDest);
+    console.log("API Call: " + stringDest);
 
     http.get(stringDest)
     .subscribe((response) => {

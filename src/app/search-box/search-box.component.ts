@@ -20,6 +20,10 @@ export class SearchBoxComponent {
   // searchForm.get("autoDetect").value
 
   public searchResults: any = [];
+
+  public detailBool = false;
+
+  public detailRow: any = [];
   //public autoDetect = false;
 
   constructor(private phone: TelephoneService) {}
@@ -86,6 +90,13 @@ export class SearchBoxComponent {
     TelephoneService.ticketMasterManual("concerts", 50, "music", TelephoneService.ip, this.phone.http, this);
     //console.log(this.searchResults);
     //this.searchResults = TelephoneService.ticketMasterJSON["_Embedded"]["events"];
+  }
+
+  showDetails(obj: Element): void
+  {
+    const index = obj.children[0].innerHTML;
+    this.detailRow = this.searchResults[index];
+    this.detailBool = true;
   }
 
   // hideLocation(): void {
