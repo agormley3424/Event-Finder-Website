@@ -135,4 +135,25 @@ export class TelephoneService {
       //console.log(caller.spotifyResult);
     })
   }
+
+  public static getAlbums(artistID: string, http: HttpClient, caller: SearchBoxComponent)
+  {
+    console.log("getAlbums called with ID " + artistID);
+    const stringDest= "https://hw8-380107.wl.r.appspot.com/spotifyAlbums?artistID=" + artistID;
+
+    caller.albums.push([]);
+    const index = caller.albums.length - 1;
+
+    http.get(stringDest)
+    .subscribe((response) => {
+      const responseJSON = TelephoneService.responseToJSON(response)['items'];
+
+      //console.log("Album response JSON: " + responseJSON);
+
+      for (let i = 0; i < responseJSON.length; i++)
+      {
+        caller.albums[index].push(responseJSON[i]['images'][0]['url']);
+      }
+    })
+  }
 }

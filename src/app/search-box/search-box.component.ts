@@ -21,6 +21,7 @@ export class SearchBoxComponent {
 
   public searchResults: any = [];
   public spotifyResult: any = [];
+  public albums: any = [];
 
   public detailBool = false;
 
@@ -32,6 +33,8 @@ export class SearchBoxComponent {
   public hasSubType: boolean;
   public hasType: boolean;
   public hasPriceRange: boolean;
+
+  public albumsLoaded = false;
 
   //public autoDetect = false;
 
@@ -163,6 +166,7 @@ export class SearchBoxComponent {
     //console.log(this.detailRow['_embedded']['attractions'][0]);
 
     this.spotifyResult = [];
+    this.albumsLoaded = false;
     for (let i = 0; i < this.detailRow['_embedded']['attractions'].length; i++)
     {
       const artist = this.detailRow['_embedded']['attractions'][i]['name'];
@@ -170,7 +174,28 @@ export class SearchBoxComponent {
       TelephoneService.getSpotify(artist, this.phone.http, this);
     }
 
+    console.log("Spotify artist array: ");
     console.log(this.spotifyResult);
+
+    setTimeout(() => {
+      this.getAlbums();
+    }, 500);
+    
+  }
+
+  getAlbums()
+  {
+    this.albums = [];
+
+    for (let i = 0; i < this.spotifyResult.length; i++)
+    {
+      TelephoneService.getAlbums(this.spotifyResult[i]['id'], this.phone.http, this);
+    }
+
+    this.albumsLoaded = true;
+
+    console.log("Albums array: ");
+    console.log(this.albums);
   }
 
   // hideLocation(): void {

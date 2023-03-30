@@ -65,6 +65,23 @@ function searchArtist(artistName, req, res)
   });
 }
 
+function searchAlbums(artistID, req, res)
+{
+  refreshToken();
+  spotifyApi.getArtistAlbums(artistID, {limit: 3})
+  .then(function(data) {
+    console.log("Album search successful, printing JSON");
+    console.log(data.body);
+    //response = data.body;
+    res.json(data.body);
+  }, function(err) {
+    console.log("Album search unsuccessful, printing error:");
+    console.error(err);
+    //response = err;
+    res.json(err);
+  });
+}
+
 // function processSpotify(returnVal)
 // {
 //   response = returnVal;
@@ -82,6 +99,10 @@ app.get('/spotify', (req, res) => {
   //console.log("Response is " + response);
   //res.json(response);
   //res.json({"foo": "bar"});
+}); 
+
+app.get('/spotifyAlbums', (req, res) => { 
+  searchAlbums(req.query.artistID, req, res);
 }); 
 
 async function searchTicketMaster(req, res)
