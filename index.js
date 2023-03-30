@@ -3,6 +3,8 @@ const http = require('http');
 const path = require('path');
 
 const app = express();
+const axios = require('axios').default;
+var geohash = require('ngeohash');
 
 const port = process.env.PORT || 3001;
 
@@ -85,6 +87,135 @@ app.get('/spotify', (req, res) => {
   //res.json(response);
   //res.json({"foo": "bar"});
 }); 
+
+async function searchTicketMaster(req, res)
+{
+  const catTable = {"music":"KZFzniwnSyZfZ7v7nJ",
+                    "sports":"KZFzniwnSyZfZ7v7nE",
+                    "artstheatre":"KZFzniwnSyZfZ7v7na",
+                    "film":"KZFzniwnSyZfZ7v7nn",
+                    "misc":"KZFzniwnSyZfZ7v7n1",
+                    "default":""};
+  
+  locationSearch = req.query.locationSearch;
+
+  var latitude;
+  var longitude;
+
+  //let waiting = false;
+
+  if (locationSearch == "true")
+  {
+    var googleString = "https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyBmKpWW7k6eeEiJkccFLThjonWApR40Xis&address=";
+    googleString += req.query.location;
+    var googleAddy;
+    //waiting = true;
+    googleAddy = await axios.get(googleString);
+    // .then((response) => {
+    //   console.log("index.js line 112 Axios get SUCCEEDED");
+    //   //console.log("Initial latitude is " + latitude);
+    //   //waiting = false;
+    // })
+    // .catch((error) => {
+    //   console.log("Error: index.js line 112: Axios get FAILED");
+    //   //console.log(error);
+    //   return;
+    // });
+
+    //console.log(googleAddy);
+    googleAddy = googleAddy.data;
+    latitude = googleAddy["results"][0]["geometry"]["location"]["lat"];
+    longitude = googleAddy["results"][0]["geometry"]["location"]["lng"];
+
+  }
+  else
+  {
+    let ipAddy = req.query.location;
+    let returnAddresses = ["", ""];
+    let midIndex = -1;
+
+    for (let i = 0; i < ipAddy.length; i++)
+    {
+      if (ipAddy[i] == ',')
+      {
+        midindex = i;
+        returnAddresses[0] = ipAddy.substring(0, i);
+        break;
+      }
+    }
+
+    returnAddresses[1] = ipAddy.substring(midIndex + 1);
+    latitude = returnAddresses[0];
+    longitude = returnAddresses[1];
+  }
+
+  //while (waiting) {};
+
+  let latFloat = parseFloat(latitude);
+  let longFloat = parseFloat(longitude);
+
+  const precision = 7;
+
+  //console.log("Latitude is " + latitude + ", and in float form it's " + latFloat);
+  const geoPoint = geohash.encode(latFloat, longFloat, precision);
+
+  let segmentID = catTable[req.query.category];
+
+  let TMkey = "ZUe4QATYrGXNGmv3VGkGdAz0gC3XXeVo";
+
+  let radius = req.query.distance;
+
+  let keyword = req.query.keyword;
+
+  var ticketMasterString = "https://app.ticketmaster.com/discovery/v2/events.json?" + "apikey=" + TMkey;
+  ticketMasterString += "&keyword=" + keyword;
+  ticketMasterString += "&segmentId=" + segmentID + "&radius=" + radius;
+  ticketMasterString += "&unit=miles&geoPoint=" + geoPoint;
+
+  console.log("Ticketmaster string is " + ticketMasterString);
+
+  axios.get(ticketMasterString)
+  .then((response) => {
+    console.log("index.js line 170 Axios get SUCCEEDED");
+    console.log(ticketMasterString);
+    return response.data;
+  })
+  .then((data) => {
+    res.json(data);
+  });
+
+  return;
+}
+
+// function getNow(url)
+// {
+//   let doneFlag = [false];
+//   var promise = axios.get(url)
+//     .then((response) => {
+//     console.log("GET request to " + url + " SUCCEEDED");
+//     doneFlag = true;
+//     return response.data;
+//   })
+//   .catch((error) => {
+//     console.log("GET request to " + url + " FAILED");
+//     //console.log(error);
+//     return error;
+//   });
+
+  return [promise, doneFlag]
+
+  //return response;
+}
+
+// async function getRequest(url)
+// {
+
+// }
+
+app.get('/ticketMaster', (req, res) => {
+  //res.json(searchTicketMaster(req));
+  searchTicketMaster(req, res);
+});
 
 // app.get('/*', (req,res) => {
 //   res.sendFile(__dirname + '/dist/my-app');
