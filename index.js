@@ -187,26 +187,6 @@ async function searchTicketMaster(req, res)
   return;
 }
 
-// function getNow(url)
-// {
-//   let doneFlag = [false];
-//   var promise = axios.get(url)
-//     .then((response) => {
-//     console.log("GET request to " + url + " SUCCEEDED");
-//     doneFlag = true;
-//     return response.data;
-//   })
-//   .catch((error) => {
-//     console.log("GET request to " + url + " FAILED");
-//     //console.log(error);
-//     return error;
-//   });
-
-  return [promise, doneFlag]
-
-  //return response;
-}
-
 // async function getRequest(url)
 // {
 
