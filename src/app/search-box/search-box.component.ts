@@ -24,6 +24,13 @@ export class SearchBoxComponent {
   public detailBool = false;
 
   public detailRow: any = [];
+
+  public hasGenre: boolean;
+  public hasSubGenre: boolean;
+  public hasSegment: boolean;
+  public hasSubType: boolean;
+  public hasType: boolean;
+
   //public autoDetect = false;
 
   constructor(private phone: TelephoneService) {}
@@ -97,6 +104,51 @@ export class SearchBoxComponent {
     const index = obj.children[0].innerHTML;
     this.detailRow = this.searchResults[index];
     this.detailBool = true;
+
+    if (this.detailRow['classifications'][0].hasOwnProperty('genre'))
+    {
+      this.hasGenre = true;
+    }
+    else
+    {
+      this.hasGenre = false;
+    }
+
+    if (this.detailRow['classifications'][0].hasOwnProperty('subGenre'))
+    {
+      this.hasSubGenre = true;
+    }
+    else
+    {
+      this.hasSubGenre = false;
+    }
+
+    if (this.detailRow['classifications'][0].hasOwnProperty('segment'))
+    {
+      this.hasSegment = true;
+    }
+    else
+    {
+      this.hasSegment = false;
+    }
+
+    if (this.detailRow['classifications'][0].hasOwnProperty('subType'))
+    {
+      this.hasSubType = true;
+    }
+    else
+    {
+      this.hasSubType = false;
+    }
+
+    if (this.detailRow['classifications'][0].hasOwnProperty('type'))
+    {
+      this.hasType = true;
+    }
+    else
+    {
+      this.hasType = false;
+    }
   }
 
   // hideLocation(): void {

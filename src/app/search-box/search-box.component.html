@@ -146,7 +146,7 @@
             </div>
             <div class="row">
               <div class="col-sm-12 d-flex justify-content-center">
-                (Venue Content)
+                {{detailRow['_embedded']['venues'][0]['name']}}
               </div>
             </div>
             <br>
@@ -157,7 +157,22 @@
             </div>
             <div class="row">
               <div class="col-sm-12 d-flex justify-content-center">
-                (Genres Content)
+                <ng-container *ngIf="hasGenre">
+                  {{detailRow['classifications'][0]['genre']['name'] + ' | '}}
+                </ng-container>
+                <ng-container *ngIf="hasSegment">
+                  {{detailRow['classifications'][0]['segment']['name'] + ' | '}}
+                </ng-container>
+                <ng-container *ngIf="hasSubGenre">
+                  {{detailRow['classifications'][0]['subGenre']['name'] + ' | '}}
+                </ng-container>
+                <ng-container *ngIf="hasType">
+                  {{detailRow['classifications'][0]['type']['name'] + ' | '}}
+                </ng-container>
+                <ng-container *ngIf="hasSubType">
+                  {{detailRow['classifications'][0]['subType']['name'] + ' | '}}
+                </ng-container>
+                
               </div>
             </div>
             <br>
