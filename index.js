@@ -5,6 +5,7 @@ const path = require('path');
 const app = express();
 const axios = require('axios').default;
 var geohash = require('ngeohash');
+var SpotifyWebApi = require('spotify-web-api-node');
 
 const port = process.env.PORT || 3001;
 
@@ -14,15 +15,10 @@ app.use("/favorites", express.static(__dirname + '/dist/my-app'));
 
 app.use("/search", express.static(__dirname + '/dist/my-app'));
 
-var response = null;
-
 // Instantiate Spotify Wrapper
- const client_id = '0071111b9ea94493898caee6d25a95e4';
- const client_secret = 'e02e456718dc4029a7ccc17c53766917';
+const client_id = '0071111b9ea94493898caee6d25a95e4';
+const client_secret = 'e02e456718dc4029a7ccc17c53766917';
 
-
-
- var SpotifyWebApi = require('spotify-web-api-node');
 
 // credentials are optional
 var spotifyApi = new SpotifyWebApi({
@@ -97,7 +93,7 @@ async function searchTicketMaster(req, res)
                     "misc":"KZFzniwnSyZfZ7v7n1",
                     "default":""};
   
-  locationSearch = req.query.locationSearch;
+  const locationSearch = req.query.locationSearch;
 
   var latitude;
   var longitude;
@@ -138,7 +134,7 @@ async function searchTicketMaster(req, res)
     {
       if (ipAddy[i] == ',')
       {
-        midindex = i;
+        midIndex = i;
         returnAddresses[0] = ipAddy.substring(0, i);
         break;
       }
