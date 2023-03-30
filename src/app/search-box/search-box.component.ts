@@ -30,6 +30,7 @@ export class SearchBoxComponent {
   public hasSegment: boolean;
   public hasSubType: boolean;
   public hasType: boolean;
+  public hasPriceRange: boolean;
 
   //public autoDetect = false;
 
@@ -148,6 +149,15 @@ export class SearchBoxComponent {
     else
     {
       this.hasType = false;
+    }
+
+    if (this.detailRow.hasOwnProperty('priceRanges'))
+    {
+      this.hasPriceRange = true;
+    }
+    else
+    {
+      this.hasPriceRange = false;
     }
   }
 

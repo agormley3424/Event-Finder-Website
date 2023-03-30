@@ -183,7 +183,10 @@
             </div>
             <div class="row">
               <div class="col-sm-12 d-flex justify-content-center">
-                (Price Range Content)
+                <ng-container *ngIf="hasPriceRange">
+                  {{detailRow['priceRanges'][0]['min'] + ' - ' + 
+                  detailRow['priceRanges'][0]['max'] + ' USD'}}
+                </ng-container>
               </div>
             </div>
             <br>
