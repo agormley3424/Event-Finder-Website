@@ -197,7 +197,21 @@
             </div>
             <div class="row">
               <div class="col-sm-12 d-flex justify-content-center">
-                (Ticket Status Content)
+                <ng-container *ngIf="detailRow['dates']['status']['code'] == 'onsale'">
+                  <button class="btn btn-success">On Sale</button>
+                </ng-container>
+                <ng-container *ngIf="detailRow['dates']['status']['code'] == 'rescheduled'">
+                  <button class="btn btn-warning">Rescheduled</button>
+                </ng-container>
+                <ng-container *ngIf="detailRow['dates']['status']['code'] == 'offsale'">
+                  <button class="btn btn-danger">Off Sale</button>
+                </ng-container>
+                <ng-container *ngIf="detailRow['dates']['status']['code'] == 'cancelled'">
+                  <button class="btn btn-dark">Cancelled</button>
+                </ng-container>
+                <ng-container *ngIf="detailRow['dates']['status']['code'] == 'postponed'">
+                  <button class="btn btn-warning">Rescheduled</button>
+                </ng-container>
               </div>
             </div>
             <br>
