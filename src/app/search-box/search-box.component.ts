@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { TelephoneService } from "../telephone.service";
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import 'bootstrap';
 
 @Component({
   selector: 'app-search-box',
