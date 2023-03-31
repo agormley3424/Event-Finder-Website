@@ -45,6 +45,8 @@ export class SearchBoxComponent {
 
   public albumsLoaded = false;
 
+  public locationSearch = true;
+
   coordinates: {
     lat: number;
     lng: number;
@@ -86,13 +88,34 @@ export class SearchBoxComponent {
   setIP(): void {
     //console.log("Calling setIP");
     TelephoneService.autoLocationOn(this.phone.http);
+    this.locationSearch = false;
   }
 
   unSetIP(): void {
     TelephoneService.autoLocationOff();
+    this.locationSearch = true;
   }
 
+  @ViewChild('keywordBox') keywordVar:ElementRef;
+  @ViewChild('locationBox') locationVar:ElementRef;
+
   setTicketMasterAuto(): void {
+    if (!this.keywordVar.nativeElement.checkValidity())
+    {
+      this.keywordVar.nativeElement.reportValidity();
+  
+      return;
+    }
+    else if (this.locationSearch)
+    {
+      if (!this.locationVar.nativeElement.checkValidity())
+      {
+        this.locationVar.nativeElement.reportValidity();
+    
+        return;
+      }
+    }
+
     this.hideStuff = false;
     const keyword: string = this.searchForm.get("keyword").value;
     const distance: number = this.searchForm.get("distance").value;
@@ -106,6 +129,22 @@ export class SearchBoxComponent {
   }
 
   setTicketMasterManual(): void {
+    if (!this.keywordVar.nativeElement.checkValidity())
+    {
+      this.keywordVar.nativeElement.reportValidity();
+  
+      return;
+    }
+    else if (this.locationSearch)
+    {
+      if (!this.locationVar.nativeElement.checkValidity())
+      {
+        this.locationVar.nativeElement.reportValidity();
+    
+        return;
+      }
+    }
+
     this.hideStuff = false;
     const keyword: string = this.searchForm.get("keyword").value;
     const distance: number = this.searchForm.get("distance").value;
