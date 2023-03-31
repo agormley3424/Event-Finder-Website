@@ -435,7 +435,7 @@
             </div>
             <div class="row">
               <div class="col-12 d-flex justify-content-center">
-                <ng-container *ngIf="hasPhoneNumber">
+                <ng-container *ngIf="hasBoxOffice">
                   {{detailRow['_embedded']['venues'][0]['boxOfficeInfo']['phoneNumberDetail']}}
                 </ng-container>
               </div>
@@ -449,7 +449,9 @@
             </div>
             <div class="row">
               <div class="col-12 d-flex justify-content-center">
-                (Open Hours Info)
+                <ng-container *ngIf="hasBoxOffice">
+                  {{detailRow['_embedded']['venues'][0]['boxOfficeInfo']['openHoursDetail']}}
+                </ng-container>
               </div>
             </div>
             <div class="row">
@@ -465,7 +467,9 @@
             </div>
             <div class="row">
               <div class="col-12 d-flex justify-content-center">
-                (General Rule Info)
+                <ng-container *ngIf="hasGeneralInfo">
+                  {{detailRow['_embedded']['venues'][0]['generalInfo']['generalRule']}}
+                </ng-container>
               </div>
             </div>
             <div class="row">
@@ -481,7 +485,9 @@
             </div>
             <div class="row">
               <div class="col-12 d-flex justify-content-center">
-                (Child Rule Info)
+                <ng-container *ngIf="hasGeneralInfo">
+                  {{detailRow['_embedded']['venues'][0]['generalInfo']['childRule']}}
+                </ng-container>
               </div>
             </div>
             <div class="row">

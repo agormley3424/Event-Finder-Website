@@ -33,7 +33,8 @@ export class SearchBoxComponent {
   public hasSubType: boolean;
   public hasType: boolean;
   public hasPriceRange: boolean;
-  public hasPhoneNumber: boolean;
+  public hasBoxOffice: boolean;
+  public hasGeneralInfo: boolean;
 
   public albumsLoaded = false;
 
@@ -171,11 +172,20 @@ export class SearchBoxComponent {
 
     if (this.detailRow['_embedded']['venues'][0].hasOwnProperty('boxOfficeInfo'))
     {
-      this.hasPhoneNumber = true;
+      this.hasBoxOffice = true;
     }
     else
     {
-      this.hasPhoneNumber = false;
+      this.hasBoxOffice = false;
+    }
+
+    if (this.detailRow['_embedded']['venues'][0].hasOwnProperty('generalInfo'))
+    {
+      this.hasGeneralInfo = true;
+    }
+    else
+    {
+      this.hasGeneralInfo = false;
     }
 
     this.spotifyResult = [];
