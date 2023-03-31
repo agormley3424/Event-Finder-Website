@@ -36,6 +36,8 @@ export class SearchBoxComponent {
   public hasPriceRange: boolean;
   public hasBoxOffice: boolean;
   public hasGeneralInfo: boolean;
+  public hasAttractions: boolean;
+  public hideStuff = true;
 
   public showHoursDetail = false;
   public showGeneralDetail = false;
@@ -55,6 +57,11 @@ export class SearchBoxComponent {
   testFuncIP(): void
   {
     this.setIP();
+  }
+
+  clearFunc()
+  {
+    this.hideStuff = true;
   }
 
   public open(modal: any): void {
@@ -86,6 +93,7 @@ export class SearchBoxComponent {
   }
 
   setTicketMasterAuto(): void {
+    this.hideStuff = false;
     const keyword: string = this.searchForm.get("keyword").value;
     const distance: number = this.searchForm.get("distance").value;
     const category: string = this.searchForm.get("category").value;
@@ -98,6 +106,7 @@ export class SearchBoxComponent {
   }
 
   setTicketMasterManual(): void {
+    this.hideStuff = false;
     const keyword: string = this.searchForm.get("keyword").value;
     const distance: number = this.searchForm.get("distance").value;
     const category: string = this.searchForm.get("category").value;
@@ -205,14 +214,33 @@ export class SearchBoxComponent {
       this.hasGeneralInfo = false;
     }
 
+    if (this.detailRow['_embedded'].hasOwnProperty('attractions'))
+    {
+      this.hasAttractions = true;
+    }
+    else
+    {
+      this.hasAttractions = false;
+    }
+
     this.spotifyResult = [];
     this.albumsLoaded = false;
-    for (let i = 0; i < this.detailRow['_embedded']['attractions'].length; i++)
+
+    if (this.hasAttractions)
     {
-      const artist = this.detailRow['_embedded']['attractions'][i]['name'];
-      //console.log("Artist is " + artist);
+      for (let i = 0; i < this.detailRow['_embedded']['attractions'].length; i++)
+      {
+        const artist = this.detailRow['_embedded']['attractions'][i]['name'];
+        //console.log("Artist is " + artist);
+        TelephoneService.getSpotify(artist, this.phone.http, this);
+      }
+    }
+    else
+    {
+      const artist = this.detailRow['info'];
       TelephoneService.getSpotify(artist, this.phone.http, this);
     }
+
 
     console.log("Spotify artist array: ");
     console.log(this.spotifyResult);
