@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
@@ -21,6 +21,17 @@ export class TelephoneService {
     venue: string;
   };
 
+
+  public static initiate()
+  {
+    console.log("initiation called");
+    this.favoriteTable = JSON.parse(localStorage.getItem("favoriteTable"));
+    console.log("this.favoriteTable");
+
+    console.log("favorite table initiated to");
+    console.log(this.favoriteTable);
+  }
+
   public static favoriteTable = [];
 
   public static addFavorite(date: string, event: string, category: string, venue: string): void
@@ -28,11 +39,15 @@ export class TelephoneService {
     const id = this.favoriteTable.length + 1;
     const newRow = {id, date, event, category, venue};
     this.favoriteTable.push(newRow);
+
+    localStorage.setItem("favoriteTable", JSON.stringify(this.favoriteTable));
   }
 
   public static removeFavoriteNum(id: number)
   {
     this.favoriteTable.splice(id - 1, 1);
+
+    localStorage.setItem("favoriteTable", JSON.stringify(this.favoriteTable));
   }
 
   public static removeFavorite(event: string)
@@ -45,11 +60,14 @@ export class TelephoneService {
         break;
       }
     }
+
+    localStorage.setItem("favoriteTable", JSON.stringify(this.favoriteTable));
   }
 
 
 
   constructor(public http: HttpClient) {
+    TelephoneService.initiate();
   }
 
   private static responseToJSON(response: any): any {
