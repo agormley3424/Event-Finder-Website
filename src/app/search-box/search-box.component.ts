@@ -38,6 +38,7 @@ export class SearchBoxComponent {
 
   public showHoursDetail = false;
   public showGeneralDetail = false;
+  public showChildDetail = false;
 
   public albumsLoaded = false;
 
@@ -232,6 +233,11 @@ export class SearchBoxComponent {
   flipGeneralDetail()
   {
     this.showGeneralDetail = !this.showGeneralDetail;
+  }
+
+  flipChildDetail()
+  {
+    this.showChildDetail = !this.showChildDetail;
   }
 
   // hideLocation(): void {

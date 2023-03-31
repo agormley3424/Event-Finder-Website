@@ -509,14 +509,26 @@
             </div>
             <div class="row">
               <div class="col-12 d-flex justify-content-center">
-                <ng-container *ngIf="hasGeneralInfo">
-                  {{detailRow['_embedded']['venues'][0]['generalInfo']['childRule']}}
+                <ng-container *ngIf="hasGeneralInfo && !showChildDetail; else childElse">
+                  <div class="module line-clamp"><p>{{detailRow['_embedded']['venues'][0]['generalInfo']['childRule']}}</p></div>
                 </ng-container>
+                <ng-template #childElse>
+                  <ng-container *ngIf="hasGeneralInfo && showChildDetail">
+                    <div><p>{{detailRow['_embedded']['venues'][0]['generalInfo']['childRule']}}</p></div>
+                  </ng-container>
+                </ng-template>
               </div>
             </div>
             <div class="row">
               <div class="col-12 d-flex justify-content-center">
-                <a href="">Show More</a>
+                <ng-container *ngIf="hasGeneralInfo && !showChildDetail; else showChildElse">
+                  <span class="pseudoLink" (click)="flipChildDetail()">Show More</span>
+                </ng-container>
+                <ng-template #showChildElse>
+                  <ng-container *ngIf="hasGeneralInfo && showChildDetail">
+                    <span class="pseudoLink" (click)="flipChildDetail()">Show Less</span>
+                  </ng-container>
+                </ng-template>
               </div>
             </div>
           </div>
