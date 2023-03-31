@@ -461,10 +461,10 @@
             </div>
             <div class="row">
               <div class="col-12 d-flex justify-content-center">
-                <ng-container *ngIf="hasBoxOffice && !showHoursDetail; else showElseHours">
+                <ng-container *ngIf="hasBoxOffice && !showHoursDetail; else showHoursElse">
                   <span class="pseudoLink" (click)="flipHoursDetail()">Show More</span>
                 </ng-container>
-                <ng-template #showElseHours>
+                <ng-template #showHoursElse>
                   <ng-container *ngIf="hasBoxOffice && showHoursDetail">
                     <span class="pseudoLink" (click)="flipHoursDetail()">Show Less</span>
                   </ng-container>
@@ -479,14 +479,26 @@
             </div>
             <div class="row">
               <div class="col-12 d-flex justify-content-center">
-                <ng-container *ngIf="hasGeneralInfo">
+                <ng-container *ngIf="hasGeneralInfo && !showGeneralDetail; else generalElse">
                   <div class="module line-clamp"><p>{{detailRow['_embedded']['venues'][0]['generalInfo']['generalRule']}}</p></div>
                 </ng-container>
+                <ng-template #generalElse>
+                  <ng-container *ngIf="hasGeneralInfo && showGeneralDetail">
+                    <div><p>{{detailRow['_embedded']['venues'][0]['generalInfo']['generalRule']}}</p></div>
+                  </ng-container>
+                </ng-template>
               </div>
             </div>
             <div class="row">
               <div class="col-12 d-flex justify-content-center">
-                <a href="">Show More</a>
+                <ng-container *ngIf="hasGeneralInfo && !showGeneralDetail; else showGeneralElse">
+                  <span class="pseudoLink" (click)="flipGeneralDetail()">Show More</span>
+                </ng-container>
+                <ng-template #showGeneralElse>
+                  <ng-container *ngIf="hasGeneralInfo && showGeneralDetail">
+                    <span class="pseudoLink" (click)="flipGeneralDetail()">Show Less</span>
+                  </ng-container>
+                </ng-template>
               </div>
             </div>
             <br>

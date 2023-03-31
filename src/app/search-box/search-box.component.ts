@@ -37,6 +37,7 @@ export class SearchBoxComponent {
   public hasGeneralInfo: boolean;
 
   public showHoursDetail = false;
+  public showGeneralDetail = false;
 
   public albumsLoaded = false;
 
@@ -226,6 +227,11 @@ export class SearchBoxComponent {
   flipHoursDetail()
   {
     this.showHoursDetail = !this.showHoursDetail;
+  }
+
+  flipGeneralDetail()
+  {
+    this.showGeneralDetail = !this.showGeneralDetail;
   }
 
   // hideLocation(): void {
