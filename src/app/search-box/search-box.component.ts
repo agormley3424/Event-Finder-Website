@@ -43,38 +43,6 @@ export class SearchBoxComponent {
 
   public albumsLoaded = false;
 
-  @ViewChild('mapParam') mapRef: ElementRef; 
-
-
-
-  // longLat = {lat: 0, lng: 0};
-  // zoom = 4;
-
-  // var latfsdfsdf: any;
-
-  // lat: any = 0;
-  // long:any = 0;
-
-  // mapOptions: google.maps.MapOptions = {
-  //   center: {lat: this.lat, lng: this.long},
-  //   zoom: 4
-  // }
-
-
-  // @Output() mapChange = new EventEmitter();
-
-  mapOptions: google.maps.MapOptions = {
-    center: {lat: 0, lng: 0},
-    zoom: 4 
-  }
-
-  updateMap()
-  {
-    console.log("Map updating");
-    this.mapOptions['center']['lat'] = parseFloat(TelephoneService.ticketMasterJSON['_embedded']['events'][0]['_embedded']['venues'][0]['location']['latitude']);
-    this.mapOptions['center']['lng'] = parseFloat(TelephoneService.ticketMasterJSON['_embedded']['events'][0]['_embedded']['venues'][0]['location']['longitude']);
-  }
-
   coordinates: {
     lat: number;
     lng: number;
@@ -286,6 +254,45 @@ export class SearchBoxComponent {
   flipChildDetail()
   {
     this.showChildDetail = !this.showChildDetail;
+  }
+
+  addFavorite(): void
+  {
+    const date = this.detailRow['dates']['start']['localDate'];
+    const event = this.detailRow['name'];
+
+    let category = "";
+
+    if (this.hasGenre)
+    {
+      category += this.detailRow['classifications'][0]['genre']['name'] + ' | ';
+    }
+    if (this.hasSegment)
+    {
+      category += this.detailRow['classifications'][0]['segment']['name'] + ' | ';
+    }
+    if (this.hasSubGenre)
+    {
+      category += this.detailRow['classifications'][0]['subGenre']['name'] + ' | ';
+    }
+    if (this.hasType)
+    {
+      category += this.detailRow['classifications'][0]['type']['name'] + ' | ';
+    }
+    if (this.hasSubType)
+    {
+      category += this.detailRow['classifications'][0]['subType']['name'] + ' | ';
+    }
+
+
+    const venue = this.detailRow['_embedded']['venues'][0]['name'];
+
+    TelephoneService.addFavorite(date, event, category, venue);
+  }
+
+  removeFavorite(): void
+  {
+    TelephoneService.removeFavorite(this.detailRow['name']);
   }
 
   // hideLocation(): void {

@@ -13,10 +13,43 @@ export class TelephoneService {
   public static spotifyJSON: any = null;
   public static ip: any = null;
 
+  public favoriteRow: {
+    number: number;
+    date: string;
+    event: string;
+    category: string;
+    venue: string;
+  };
+
+  public static favoriteTable = [];
+
+  public static addFavorite(date: string, event: string, category: string, venue: string): void
+  {
+    const id = this.favoriteTable.length + 1;
+    const newRow = {id, date, event, category, venue};
+    this.favoriteTable.push(newRow);
+  }
+
+  public static removeFavoriteNum(id: number)
+  {
+    this.favoriteTable.splice(id - 1, 1);
+  }
+
+  public static removeFavorite(event: string)
+  {
+    for (let i = 0; i < this.favoriteTable.length; i++)
+    {
+      if (this.favoriteTable[i]['event'] == event)
+      {
+        this.favoriteTable.splice(i, 1);
+        break;
+      }
+    }
+  }
+
 
 
   constructor(public http: HttpClient) {
-    
   }
 
   private static responseToJSON(response: any): any {
@@ -156,4 +189,5 @@ export class TelephoneService {
       }
     })
   }
+
 }

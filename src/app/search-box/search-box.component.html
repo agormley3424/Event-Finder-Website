@@ -106,8 +106,8 @@
     </div>
     <br>
     <div class="row container d-flex justify-content-center">
-      <h2 class="col-3" href="">Event Name Here</h2>
-      <button id="heartButton" class="col-1" type="button">&hearts;</button>
+      <h2 class="col-3" href="">{{detailRow['name']}}</h2>
+      <button id="heartButton" class="col-1" type="button" (click)="addFavorite()">&hearts;</button>
     </div>
     <br>
     <mat-tab-group mat-align-tabs="center" backgroundColor="primary" mat-stretch-tabs="false">
@@ -171,7 +171,6 @@
                 <ng-container *ngIf="hasSubType">
                   {{detailRow['classifications'][0]['subType']['name'] + ' | '}}
                 </ng-container>
-                
               </div>
             </div>
             <br>
@@ -535,7 +534,7 @@
         </div>
         <div class="row">
           <div class="col d-flex justify-content-center">
-            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#demoModal" (click)="updateMap()">Show venue on Google map</button>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#demoModal">Show venue on Google map</button>
           </div>
         </div>
   
@@ -575,9 +574,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <google-map [center]="coordinates" [zoom]="4">
-          <map-marker [position]="coordinates"></map-marker>
-        </google-map>
+        <google-map [zoom]="15" [center]="coordinates"><map-marker [position]="coordinates"></map-marker></google-map>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
