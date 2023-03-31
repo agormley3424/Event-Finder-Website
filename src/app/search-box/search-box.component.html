@@ -244,7 +244,7 @@
                 <div class="carousel-item active">
                   <br>
                   <div class="row">
-                    <div class="col-2 border d-flex justify-content-center">
+                    <div class="col-2  d-flex justify-content-center">
                       <figure class="figure">
                         <img [src]="artist['images'][0]['url']" class="figure-img img-fluid rounded">
                         <figcaption class="figure-caption">{{artist['name']}}</figcaption>
@@ -252,26 +252,26 @@
             
                     </div>
                     <br>
-                    <div class="col-9 border align-self-center">
+                    <div class="col-9  align-self-center">
                       <div class="row align-items-center">
-                        <div class="col-4 border">
+                        <div class="col-4 ">
                           Popularity
                         </div>
-                        <div class="col-4 border">
+                        <div class="col-4 ">
                           Followers
                         </div>
-                        <div class="col-4 border">
+                        <div class="col-4 ">
                           Spotify Link
                         </div>
                       </div>
                       <div class="row align-items-center">
-                        <div class="col-4 border">
+                        <div class="col-4 ">
                           {{artist['popularity']}}
                         </div>
-                        <div class="col-4 border">
+                        <div class="col-4 ">
                           {{artist['followers']['total']}}
                         </div>
-                        <div class="col-4 border">
+                        <div class="col-4 ">
                           <a [href]="artist['external_urls']['spotify']">Icon here</a>
                         </div>
                       </div>
@@ -307,7 +307,7 @@
                 <div class="carousel-item">
                   <br>
                   <div class="row">
-                    <div class="col-2 border d-flex justify-content-center">
+                    <div class="col-2  d-flex justify-content-center">
                       <figure class="figure">
                         <img [src]="artist['images'][0]['url']" class="figure-img img-fluid rounded">
                         <figcaption class="figure-caption">{{artist['name']}}</figcaption>
@@ -315,26 +315,26 @@
             
                     </div>
                     <br>
-                    <div class="col-9 border align-self-center">
+                    <div class="col-9  align-self-center">
                       <div class="row align-items-center">
-                        <div class="col-4 border">
+                        <div class="col-4 ">
                           Popularity
                         </div>
-                        <div class="col-4 border">
+                        <div class="col-4 ">
                           Followers
                         </div>
-                        <div class="col-4 border">
+                        <div class="col-4 ">
                           Spotify Link
                         </div>
                       </div>
                       <div class="row align-items-center">
-                        <div class="col-4 border">
+                        <div class="col-4 ">
                           {{artist['popularity']}}
                         </div>
-                        <div class="col-4 border">
+                        <div class="col-4 ">
                           {{artist['followers']['total']}}
                         </div>
-                        <div class="col-4 border">
+                        <div class="col-4 ">
                           <a [href]="artist['external_urls']['spotify']">Icon here</a>
                         </div>
                       </div>
@@ -413,7 +413,7 @@
             </div>
             <div class="row">
               <div class="col-12 d-flex justify-content-center">
-                (Name Info)
+                {{detailRow['_embedded']['venues'][0]['name']}}
               </div>
             </div>
             <br>
@@ -424,7 +424,7 @@
             </div>
             <div class="row">
               <div class="col-12 d-flex justify-content-center">
-                (Address Info)
+                {{detailRow['_embedded']['venues'][0]['address']['line1']}}
               </div>
             </div>
             <br>
@@ -435,7 +435,9 @@
             </div>
             <div class="row">
               <div class="col-12 d-flex justify-content-center">
-                (Phone Number Info)
+                <ng-container *ngIf="hasPhoneNumber">
+                  {{detailRow['_embedded']['venues'][0]['boxOfficeInfo']['phoneNumberDetail']}}
+                </ng-container>
               </div>
             </div>
           </div>

@@ -33,6 +33,7 @@ export class SearchBoxComponent {
   public hasSubType: boolean;
   public hasType: boolean;
   public hasPriceRange: boolean;
+  public hasPhoneNumber: boolean;
 
   public albumsLoaded = false;
 
@@ -164,6 +165,18 @@ export class SearchBoxComponent {
       this.hasPriceRange = false;
     }
     //console.log(this.detailRow['_embedded']['attractions'][0]);
+    // console.log("detail row: ");
+    // console.log(this.detailRow);
+    // console.log(this.detailRow['_embedded']['venues'][0]);
+
+    if (this.detailRow['_embedded']['venues'][0].hasOwnProperty('boxOfficeInfo'))
+    {
+      this.hasPhoneNumber = true;
+    }
+    else
+    {
+      this.hasPhoneNumber = false;
+    }
 
     this.spotifyResult = [];
     this.albumsLoaded = false;
