@@ -1,5 +1,4 @@
-<!-- /////////////////////////////////////////////////////// SEARCH BOX /////////////////////////////////////////////////////////// -->
-
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQIL9ndc2oHZ4w9VXJSVjV684c7pJJMHY"></script>
 <div id="searchBox" class="container">
   <h1>
     Events Search
@@ -233,7 +232,8 @@
           </div>
         </div>
         <div class="row d-flex justify-content-center">
-          Share on: <button class="col-1" type="button">F</button> <button class="col-1" type="button">T</button>
+          <!-- Share on: <button type="button" data-href="websiteUrl"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{websiteUrl}}&amp;src=sdkpreparse">Facebook</a></button> <button><a href="https://twitter.com/intent/tweet?text=text goes here {{websiteUrl}}&hashtags=hashtag1,hashtag2" target="_blank">Twitter</a>
+          </button>     -->
         </div>
       </mat-tab>
       <mat-tab label="Artist/Teams" class="container">
@@ -535,7 +535,7 @@
         </div>
         <div class="row">
           <div class="col d-flex justify-content-center">
-            <button type="button" class="btn btn-danger">Show venue on Google map</button>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#demoModal" (click)="updateMap()">Show venue on Google map</button>
           </div>
         </div>
   
@@ -543,3 +543,45 @@
     </mat-tab-group>
   </div>
 </ng-container>
+
+<!-- <ng-template #demoModal>
+  <div class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Event Venue</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Heyo
+          <google-map></google-map>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template> -->
+
+
+<div class="modal" id="demoModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <google-map #mapParam [center]="mapOptions['center']"></google-map>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

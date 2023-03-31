@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { TelephoneService } from "../telephone.service";
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import 'bootstrap';
 
 @Component({
@@ -42,13 +43,37 @@ export class SearchBoxComponent {
 
   public albumsLoaded = false;
 
+  @ViewChild('mapParam') mapRef: ElementRef; 
+
+  @Input() mapOptions: google.maps.MapOptions = {
+    center: {lat: 0, lng: 0},
+    zoom: 4
+  }
+
+  @Output() mapChange = new EventEmitter();
+
+  updateMap()
+  {
+    console.log("Map updating");
+    this.mapOptions['center']['lat'] = parseFloat(TelephoneService.ticketMasterJSON['_embedded']['events'][0]['_embedded']['venues'][0]['location']['latitude']);
+    this.mapOptions['center']['lng'] = parseFloat(TelephoneService.ticketMasterJSON['_embedded']['events'][0]['_embedded']['venues'][0]['location']['longitude']);
+    
+    console.log(this.mapRef);
+
+    this.mapRef['_options'] = this.mapOptions;
+  }
+
   //public autoDetect = false;
 
-  constructor(private phone: TelephoneService) {}
+  constructor(private phone: TelephoneService, private modalService: NgbModal) {}
 
   testFuncIP(): void
   {
     this.setIP();
+  }
+
+  public open(modal: any): void {
+    this.modalService.open(modal);
   }
 
   testFunc(): void

@@ -47,3 +47,7 @@ img {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+google-map {
+  max-width:100%;
+}
