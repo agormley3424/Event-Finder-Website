@@ -45,22 +45,39 @@ export class SearchBoxComponent {
 
   @ViewChild('mapParam') mapRef: ElementRef; 
 
-  @Input() mapOptions: google.maps.MapOptions = {
-    center: {lat: 0, lng: 0},
-    zoom: 4
-  }
 
-  @Output() mapChange = new EventEmitter();
+
+  // longLat = {lat: 0, lng: 0};
+  // zoom = 4;
+
+  // var latfsdfsdf: any;
+
+  // lat: any = 0;
+  // long:any = 0;
+
+  // mapOptions: google.maps.MapOptions = {
+  //   center: {lat: this.lat, lng: this.long},
+  //   zoom: 4
+  // }
+
+
+  // @Output() mapChange = new EventEmitter();
+
+  mapOptions: google.maps.MapOptions = {
+    center: {lat: 0, lng: 0},
+    zoom: 4 
+  }
 
   updateMap()
   {
     console.log("Map updating");
     this.mapOptions['center']['lat'] = parseFloat(TelephoneService.ticketMasterJSON['_embedded']['events'][0]['_embedded']['venues'][0]['location']['latitude']);
     this.mapOptions['center']['lng'] = parseFloat(TelephoneService.ticketMasterJSON['_embedded']['events'][0]['_embedded']['venues'][0]['location']['longitude']);
-    
-    console.log(this.mapRef);
+  }
 
-    this.mapRef['_options'] = this.mapOptions;
+  coordinates: {
+    lat: number;
+    lng: number;
   }
 
   //public autoDetect = false;
@@ -140,6 +157,9 @@ export class SearchBoxComponent {
     const index = obj.children[0].innerHTML;
     this.detailRow = this.searchResults[index];
     this.detailBool = true;
+
+    this.coordinates = {lat: parseFloat(TelephoneService.ticketMasterJSON['_embedded']['events'][0]['_embedded']['venues'][0]['location']['latitude']),
+  lng: parseFloat(TelephoneService.ticketMasterJSON['_embedded']['events'][0]['_embedded']['venues'][0]['location']['longitude'])};
 
     if (this.detailRow['classifications'][0].hasOwnProperty('genre'))
     {
@@ -233,6 +253,9 @@ export class SearchBoxComponent {
       this.getAlbums();
     }, 500);
     
+
+    // this.lat = parseFloat(TelephoneService.ticketMasterJSON['_embedded']['events'][0]['_embedded']['venues'][0]['location']['latitude']);
+    // this.long = parseFloat(TelephoneService.ticketMasterJSON['_embedded']['events'][0]['_embedded']['venues'][0]['location']['longitude']);
   }
 
   getAlbums()
