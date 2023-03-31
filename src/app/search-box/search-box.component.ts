@@ -36,6 +36,8 @@ export class SearchBoxComponent {
   public hasBoxOffice: boolean;
   public hasGeneralInfo: boolean;
 
+  public showHoursDetail = false;
+
   public albumsLoaded = false;
 
   //public autoDetect = false;
@@ -221,7 +223,13 @@ export class SearchBoxComponent {
     console.log(this.albums);
   }
 
+  flipHoursDetail()
+  {
+    this.showHoursDetail = !this.showHoursDetail;
+  }
+
   // hideLocation(): void {
   //   this.searchForm.get("location").
   // }
 }
+
