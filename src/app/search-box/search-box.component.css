@@ -1,9 +1,17 @@
 #searchBox {
   max-width: 600px;
+  background-color: rgba(145, 145, 145, 0.35);
+  border-radius: 10px;
 }
 
 h1 {
   text-align:center;
+  color: white;
+  font-family:Times;
+}
+
+label {
+  color: lightblue;
 }
 
 td img {
@@ -50,4 +58,15 @@ img {
 
 google-map {
   max-width:100%;
+}
+
+.asterisk {
+  color: red;
+}
+
+hr {
+  background-color: white;
+  color: white;
+  border: solid 2px white;
+  height: 1px;
 }
