@@ -132,15 +132,9 @@
               </div>
               <div class="row">
                 <div class="col-sm-12 d-flex justify-content-center">
-                  <ng-container *ngIf="hasAttractions; else elseAttractions">
-                    <ng-container *ngFor="let artist of detailRow._embedded.attractions; let i = index">
-                      {{artist.name + (i < detailRow._embedded.attractions.length - 1 ? ' | ' : '')}}
-                    </ng-container>
+                  <ng-container *ngFor="let artist of detailRow._embedded.attractions; let i = index">
+                    {{artist.name + (i < detailRow._embedded.attractions.length - 1 ? ' | ' : '')}}
                   </ng-container>
-                  <ng-template #elseAttractions>
-                    {{detailRow.info}}
-                  </ng-template>
-  
                 </div>
               </div>
               <br>
@@ -162,21 +156,11 @@
               </div>
               <div class="row">
                 <div class="col-sm-12 d-flex justify-content-center">
-                  <ng-container *ngIf="hasGenre">
-                    {{detailRow.classifications[0].genre.name + ' | '}}
-                  </ng-container>
-                  <ng-container *ngIf="hasSegment">
-                    {{detailRow.classifications[0].segment.name + ' | '}}
-                  </ng-container>
-                  <ng-container *ngIf="hasSubGenre">
-                    {{detailRow.classifications[0].subGenre.name + ' | '}}
-                  </ng-container>
-                  <ng-container *ngIf="hasType">
-                    {{detailRow.classifications[0].type.name + ' | '}}
-                  </ng-container>
-                  <ng-container *ngIf="hasSubType">
-                    {{detailRow.classifications[0].subType.name + ' | '}}
-                  </ng-container>
+                  {{detailRow.classifications[0].genre.name + ' | '}}
+                  {{detailRow.classifications[0].segment.name + ' | '}}
+                  {{detailRow.classifications[0].subGenre.name + ' | '}}
+                  {{detailRow.classifications[0].type.name + ' | '}}
+                  {{detailRow.classifications[0].subType.name + ' | '}}
                 </div>
               </div>
               <br>
@@ -187,10 +171,8 @@
               </div>
               <div class="row">
                 <div class="col-sm-12 d-flex justify-content-center">
-                  <ng-container *ngIf="hasPriceRange">
-                    {{detailRow.priceRanges[0].min + ' - ' + 
-                    detailRow.priceRanges[0].max + ' USD'}}
-                  </ng-container>
+                  {{detailRow.priceRanges[0].min + ' - ' + 
+                  detailRow.priceRanges[0].max + ' USD'}}
                 </div>
               </div>
               <br>
@@ -451,9 +433,7 @@
               </div>
               <div class="row">
                 <div class="col-12 d-flex justify-content-center">
-                  <ng-container *ngIf="hasBoxOffice">
-                    {{detailRow._embedded.venues[0].boxOfficeInfo.phoneNumberDetail}}
-                  </ng-container>
+                  {{detailRow._embedded.venues[0].boxOfficeInfo.phoneNumberDetail}}
                 </div>
               </div>
             </div>
@@ -465,11 +445,11 @@
               </div>
               <div class="row">
                 <div class="col-12 d-flex justify-content-center">
-                  <ng-container *ngIf="hasBoxOffice && !showHoursDetail; else hoursElse">
+                  <ng-container *ngIf="!showHoursDetail; else hoursElse">
                     <div class="module line-clamp"><p>{{detailRow._embedded.venues[0].boxOfficeInfo.openHoursDetail}}</p></div>
                   </ng-container>
                   <ng-template #hoursElse>
-                    <ng-container *ngIf="hasBoxOffice && showHoursDetail">
+                    <ng-container *ngIf="showHoursDetail">
                       {{detailRow._embedded.venues[0].boxOfficeInfo.openHoursDetail}}
                     </ng-container>
                   </ng-template>
@@ -477,11 +457,11 @@
               </div>
               <div class="row">
                 <div class="col-12 d-flex justify-content-center">
-                  <ng-container *ngIf="hasBoxOffice && !showHoursDetail; else showHoursElse">
+                  <ng-container *ngIf="!showHoursDetail; else showHoursElse">
                     <span class="pseudoLink" (click)="flipHoursDetail()">Show More</span>
                   </ng-container>
                   <ng-template #showHoursElse>
-                    <ng-container *ngIf="hasBoxOffice && showHoursDetail">
+                    <ng-container *ngIf="showHoursDetail">
                       <span class="pseudoLink" (click)="flipHoursDetail()">Show Less</span>
                     </ng-container>
                   </ng-template>
@@ -495,11 +475,11 @@
               </div>
               <div class="row">
                 <div class="col-12 d-flex justify-content-center">
-                  <ng-container *ngIf="hasGeneralInfo && !showGeneralDetail; else generalElse">
+                  <ng-container *ngIf="!showGeneralDetail; else generalElse">
                     <div class="module line-clamp"><p>{{detailRow._embedded.venues[0].generalInfo.generalRule}}</p></div>
                   </ng-container>
                   <ng-template #generalElse>
-                    <ng-container *ngIf="hasGeneralInfo && showGeneralDetail">
+                    <ng-container *ngIf="showGeneralDetail">
                       <div><p>{{detailRow._embedded.venues[0].generalInfo.generalRule}}</p></div>
                     </ng-container>
                   </ng-template>
@@ -507,11 +487,11 @@
               </div>
               <div class="row">
                 <div class="col-12 d-flex justify-content-center">
-                  <ng-container *ngIf="hasGeneralInfo && !showGeneralDetail; else showGeneralElse">
+                  <ng-container *ngIf="!showGeneralDetail; else showGeneralElse">
                     <span class="pseudoLink" (click)="flipGeneralDetail()">Show More</span>
                   </ng-container>
                   <ng-template #showGeneralElse>
-                    <ng-container *ngIf="hasGeneralInfo && showGeneralDetail">
+                    <ng-container *ngIf="showGeneralDetail">
                       <span class="pseudoLink" (click)="flipGeneralDetail()">Show Less</span>
                     </ng-container>
                   </ng-template>
@@ -525,11 +505,11 @@
               </div>
               <div class="row">
                 <div class="col-12 d-flex justify-content-center">
-                  <ng-container *ngIf="hasGeneralInfo && !showChildDetail; else childElse">
+                  <ng-container *ngIf="!showChildDetail; else childElse">
                     <div class="module line-clamp"><p>{{detailRow._embedded.venues[0].generalInfo.childRule}}</p></div>
                   </ng-container>
                   <ng-template #childElse>
-                    <ng-container *ngIf="hasGeneralInfo && showChildDetail">
+                    <ng-container *ngIf="showChildDetail">
                       <div><p>{{detailRow._embedded.venues[0].generalInfo.childRule}}</p></div>
                     </ng-container>
                   </ng-template>
@@ -537,11 +517,11 @@
               </div>
               <div class="row">
                 <div class="col-12 d-flex justify-content-center">
-                  <ng-container *ngIf="hasGeneralInfo && !showChildDetail; else showChildElse">
+                  <ng-container *ngIf="!showChildDetail; else showChildElse">
                     <span class="pseudoLink" (click)="flipChildDetail()">Show More</span>
                   </ng-container>
                   <ng-template #showChildElse>
-                    <ng-container *ngIf="hasGeneralInfo && showChildDetail">
+                    <ng-container *ngIf="showChildDetail">
                       <span class="pseudoLink" (click)="flipChildDetail()">Show Less</span>
                     </ng-container>
                   </ng-template>

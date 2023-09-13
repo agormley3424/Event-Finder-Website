@@ -28,15 +28,15 @@ export class SearchBoxComponent {
 
   public detailRow: any = [];
 
-  public hasGenre: boolean;
-  public hasSubGenre: boolean;
-  public hasSegment: boolean;
-  public hasSubType: boolean;
-  public hasType: boolean;
-  public hasPriceRange: boolean;
-  public hasBoxOffice: boolean;
-  public hasGeneralInfo: boolean;
-  public hasAttractions: boolean;
+  // public hasGenre: boolean;
+  // public hasSubGenre: boolean;
+  // public hasSegment: boolean;
+  // public hasSubType: boolean;
+  // public hasType: boolean;
+  // public hasPriceRange: boolean;
+  // public hasBoxOffice: boolean;
+  // public hasGeneralInfo: boolean;
+  // public hasAttractions: boolean;
   public hideStuff = true;
 
   public showHoursDetail = false;
@@ -77,8 +77,8 @@ export class SearchBoxComponent {
     //this.setTicketMasterManual();
 
     console.log(this.searchResults);
-    console.log(this.searchResults[0]['dates']['start']['localDate']);
-    console.log(this.searchResults[0]['dates']['start']['localTime']);
+    console.log(this.searchResults[0].dates.start.localDate);
+    console.log(this.searchResults[0].dates.start.localTime);
   }
 
   // clear(): void {
@@ -174,111 +174,111 @@ export class SearchBoxComponent {
     this.detailRow = this.searchResults[index];
     this.detailBool = true;
 
-    this.coordinates = {lat: parseFloat(TelephoneService.ticketMasterJSON['_embedded']['events'][0]['_embedded']['venues'][0]['location']['latitude']),
-  lng: parseFloat(TelephoneService.ticketMasterJSON['_embedded']['events'][0]['_embedded']['venues'][0]['location']['longitude'])};
+    this.coordinates = {lat: parseFloat(TelephoneService.ticketMasterJSON._embedded.events[0]._embedded.venues[0].location.latitude),
+    lng: parseFloat(TelephoneService.ticketMasterJSON._embedded.events[0]._embedded.venues[0].location.longitude)};
 
-    if (this.detailRow['classifications'][0].hasOwnProperty('genre'))
-    {
-      this.hasGenre = true;
-    }
-    else
-    {
-      this.hasGenre = false;
-    }
+    // if (this.detailRow.classifications[0].hasOwnProperty('genre'))
+    // {
+    //   this.hasGenre = true;
+    // }
+    // else
+    // {
+    //   this.hasGenre = false;
+    // }
 
-    if (this.detailRow['classifications'][0].hasOwnProperty('subGenre'))
-    {
-      this.hasSubGenre = true;
-    }
-    else
-    {
-      this.hasSubGenre = false;
-    }
+    // if (this.detailRow.classifications[0].hasOwnProperty('subGenre'))
+    // {
+    //   this.hasSubGenre = true;
+    // }
+    // else
+    // {
+    //   this.hasSubGenre = false;
+    // }
 
-    if (this.detailRow['classifications'][0].hasOwnProperty('segment'))
-    {
-      this.hasSegment = true;
-    }
-    else
-    {
-      this.hasSegment = false;
-    }
+    // if (this.detailRow.classifications[0].hasOwnProperty('segment'))
+    // {
+    //   this.hasSegment = true;
+    // }
+    // else
+    // {
+    //   this.hasSegment = false;
+    // }
 
-    if (this.detailRow['classifications'][0].hasOwnProperty('subType'))
-    {
-      this.hasSubType = true;
-    }
-    else
-    {
-      this.hasSubType = false;
-    }
+    // if (this.detailRow.classifications[0].hasOwnProperty('subType'))
+    // {
+    //   this.hasSubType = true;
+    // }
+    // else
+    // {
+    //   this.hasSubType = false;
+    // }
 
-    if (this.detailRow['classifications'][0].hasOwnProperty('type'))
-    {
-      this.hasType = true;
-    }
-    else
-    {
-      this.hasType = false;
-    }
+    // if (this.detailRow.classifications[0].hasOwnProperty('type'))
+    // {
+    //   this.hasType = true;
+    // }
+    // else
+    // {
+    //   this.hasType = false;
+    // }
 
-    if (this.detailRow.hasOwnProperty('priceRanges'))
-    {
-      this.hasPriceRange = true;
-    }
-    else
-    {
-      this.hasPriceRange = false;
-    }
-    //console.log(this.detailRow['_embedded']['attractions'][0]);
+    // if (this.detailRow.hasOwnProperty('priceRanges'))
+    // {
+    //   this.hasPriceRange = true;
+    // }
+    // else
+    // {
+    //   this.hasPriceRange = false;
+    // }
+    //console.log(this.detailRow._embedded.attractions[0]);
     // console.log("detail row: ");
     // console.log(this.detailRow);
-    // console.log(this.detailRow['_embedded']['venues'][0]);
+    // console.log(this.detailRow._embedded.venues[0]);
 
-    if (this.detailRow['_embedded']['venues'][0].hasOwnProperty('boxOfficeInfo'))
-    {
-      this.hasBoxOffice = true;
-    }
-    else
-    {
-      this.hasBoxOffice = false;
-    }
+    // if (this.detailRow._embedded.venues[0].hasOwnProperty('boxOfficeInfo'))
+    // {
+    //   this.hasBoxOffice = true;
+    // }
+    // else
+    // {
+    //   this.hasBoxOffice = false;
+    // }
 
-    if (this.detailRow['_embedded']['venues'][0].hasOwnProperty('generalInfo'))
-    {
-      this.hasGeneralInfo = true;
-    }
-    else
-    {
-      this.hasGeneralInfo = false;
-    }
+    // if (this.detailRow._embedded.venues[0].hasOwnProperty('generalInfo'))
+    // {
+    //   this.hasGeneralInfo = true;
+    // }
+    // else
+    // {
+    //   this.hasGeneralInfo = false;
+    // }
 
-    if (this.detailRow['_embedded'].hasOwnProperty('attractions'))
-    {
-      this.hasAttractions = true;
-    }
-    else
-    {
-      this.hasAttractions = false;
-    }
+    // if (this.detailRow._embedded.hasOwnProperty('attractions'))
+    // {
+    //   this.hasAttractions = true;
+    // }
+    // else
+    // {
+    //   this.hasAttractions = false;
+    // }
 
     this.spotifyResult = [];
     this.albumsLoaded = false;
 
-    if (this.hasAttractions)
-    {
-      for (let i = 0; i < this.detailRow['_embedded']['attractions'].length; i++)
+    // if (this.hasAttractions)
+    // {
+      for (let i = 0; i < this.detailRow._embedded.attractions.length; i++)
       {
-        const artist = this.detailRow['_embedded']['attractions'][i]['name'];
+        const artist = this.detailRow._embedded.attractions[i].name;
         //console.log("Artist is " + artist);
         TelephoneService.getSpotify(artist, this.phone.http, this);
       }
-    }
-    else
-    {
-      const artist = this.detailRow['info'];
-      TelephoneService.getSpotify(artist, this.phone.http, this);
-    }
+    //}
+    // else
+    // {
+    //   const artist = this.detailRow.info;
+    //   TelephoneService.getSpotify(artist, this.phone.http, this);
+    // }
 
 
     console.log("Spotify artist array: ");
@@ -289,8 +289,8 @@ export class SearchBoxComponent {
     }, 500);
     
 
-    // this.lat = parseFloat(TelephoneService.ticketMasterJSON['_embedded']['events'][0]['_embedded']['venues'][0]['location']['latitude']);
-    // this.long = parseFloat(TelephoneService.ticketMasterJSON['_embedded']['events'][0]['_embedded']['venues'][0]['location']['longitude']);
+    // this.lat = parseFloat(TelephoneService.ticketMasterJSON._embedded.events[0]._embedded.venues[0].location.latitude);
+    // this.long = parseFloat(TelephoneService.ticketMasterJSON._embedded.events[0]._embedded.venues[0].location.longitude);
   }
 
   getAlbums()
@@ -299,7 +299,7 @@ export class SearchBoxComponent {
 
     for (let i = 0; i < this.spotifyResult.length; i++)
     {
-      TelephoneService.getAlbums(this.spotifyResult[i]['id'], this.phone.http, this);
+      TelephoneService.getAlbums(this.spotifyResult[i].id, this.phone.http, this);
     }
 
     this.albumsLoaded = true;
@@ -325,41 +325,34 @@ export class SearchBoxComponent {
 
   addFavorite(): void
   {
-    const date = this.detailRow['dates']['start']['localDate'];
-    const event = this.detailRow['name'];
+    const date = this.detailRow.dates.start.localDate;
+    const event = this.detailRow.name;
 
     let category = "";
 
-    if (this.hasGenre)
-    {
-      category += this.detailRow['classifications'][0]['genre']['name'] + ' | ';
-    }
-    if (this.hasSegment)
-    {
-      category += this.detailRow['classifications'][0]['segment']['name'] + ' | ';
-    }
-    if (this.hasSubGenre)
-    {
-      category += this.detailRow['classifications'][0]['subGenre']['name'] + ' | ';
-    }
-    if (this.hasType)
-    {
-      category += this.detailRow['classifications'][0]['type']['name'] + ' | ';
-    }
-    if (this.hasSubType)
-    {
-      category += this.detailRow['classifications'][0]['subType']['name'] + ' | ';
-    }
+    category += this.detailRow.classifications[0].genre.name + ' | ';
 
 
-    const venue = this.detailRow['_embedded']['venues'][0]['name'];
+    category += this.detailRow.classifications[0].segment.name + ' | ';
+
+
+    category += this.detailRow.classifications[0].subGenre.name + ' | ';
+
+
+    category += this.detailRow.classifications[0].type.name + ' | ';
+
+    category += this.detailRow.classifications[0].subType.name + ' | ';
+
+
+
+    const venue = this.detailRow._embedded.venues[0].name;
 
     TelephoneService.addFavorite(date, event, category, venue);
   }
 
   removeFavorite(): void
   {
-    TelephoneService.removeFavorite(this.detailRow['name']);
+    TelephoneService.removeFavorite(this.detailRow.name);
   }
 
   // hideLocation(): void {
