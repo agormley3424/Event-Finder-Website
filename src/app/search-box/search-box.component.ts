@@ -37,6 +37,25 @@ export class SearchBoxComponent {
   // public hasBoxOffice: boolean;
   // public hasGeneralInfo: boolean;
   // public hasAttractions: boolean;
+  public rowName;
+  public localDate;
+  public rowAttractions = [];
+  public venueName;
+  public rowGenre;
+  public rowSegment;
+  public rowSubGenre;
+  public rowType;
+  public rowSubType;
+  public rowPriceMin;
+  public rowPriceMax;
+  public venueAddress;
+  public venuePhone;
+  public venueHours;
+  public venueRules;
+  public venueChildRules;
+  public ticketStatus;
+  public rowURL;
+  public rowSeatmap;
   public hideStuff = true;
 
   public showHoursDetail = false;
@@ -174,6 +193,235 @@ export class SearchBoxComponent {
     this.detailRow = this.searchResults[index];
     this.detailBool = true;
 
+    try {
+      this.rowName = this.detailRow.name;
+
+      if (this.rowName == undefined || this.rowName == "Undefined")
+      {
+        throw new TypeError();
+      }
+    } catch (typeError)
+    {
+      this.rowName = "Event Name Unavailable";
+    }
+
+    try {
+      this.localDate = this.detailRow.dates.start.localDate;
+
+      if (this.localDate == undefined || this.localDate == "Undefined")
+      {
+        throw new TypeError();
+      }
+    } catch (typeError)
+    {
+      this.localDate = "Date Unavailable";
+    }
+
+    try {
+      this.rowAttractions = this.detailRow._embedded.attractions;
+
+      if (this.rowAttractions == undefined)
+      {
+        throw new TypeError();
+      }
+
+    } catch (typeError)
+    {
+      this.rowAttractions = [];
+    }
+
+    try {
+      this.venueName = this.detailRow._embedded.venues[0].name;
+
+      if (this.venueName == undefined || this.venueName == "Undefined")
+      {
+        throw new TypeError();
+      }
+    } catch (typeError)
+    {
+      this.venueName = "Venue Name Unavailable";
+    }
+
+    try {
+      this.rowGenre = this.detailRow.classifications[0].genre.name;
+
+      if (this.rowGenre == undefined || this.rowGenre == "Undefined")
+      {
+        throw new TypeError();
+      }
+    } catch (typeError)
+    {
+      this.rowGenre = "Undefined";
+    }
+
+    try {
+      this.rowSegment = this.detailRow.classifications[0].segment.name;
+
+      if (this.rowSegment == undefined || this.rowSegment == "Undefined")
+      {
+        throw new TypeError();
+      }
+    } catch (typeError)
+    {
+      this.rowSegment = "Undefined";
+    }
+
+    try {
+      this.rowSubGenre = this.detailRow.classifications[0].subGenre.name;
+
+      if (this.rowSubGenre == undefined || this.rowSubGenre == "Undefined")
+      {
+        throw new TypeError();
+      }
+    } catch (typeError)
+    {
+      this.rowSubGenre = "Undefined";
+    }
+
+    try {
+      this.rowType = this.detailRow.classifications[0].type.name;
+
+      if (this.rowType == undefined || this.rowType == "Undefined")
+      {
+        throw new TypeError();
+      }
+    } catch (typeError)
+    {
+      this.rowType = "Undefined";
+    }
+
+    try {
+      this.rowSubType = this.detailRow.classifications[0].subType.name;
+
+      if (this.rowSubType == undefined || this.rowSubType == "Undefined")
+      {
+        throw new TypeError();
+      }
+    } catch (typeError)
+    {
+      this.rowSubType = "Undefined";
+    }
+
+    try {
+      this.rowPriceMin = this.detailRow.priceRanges[0].min;
+
+      if (this.rowPriceMin == undefined || this.rowPriceMin == "Undefined")
+      {
+        throw new TypeError();
+      }
+    } catch (typeError)
+    {
+      this.rowPriceMin = "Minimum Price Unavailable";
+    }
+
+    try {
+      this.rowPriceMax = this.detailRow.priceRanges[0].max;
+
+      if (this.rowPriceMax == undefined || this.rowPriceMax == "Undefined")
+      {
+        throw new TypeError();
+      }
+    } catch (typeError)
+    {
+      this.rowPriceMax = "Maximum Price Unavailable";
+    }
+
+    try {
+      this.venueAddress = this.detailRow._embedded.venues[0].address.line1;
+
+      if (this.venueAddress == undefined || this.venueAddress == "Undefined")
+      {
+        throw new TypeError();
+      }
+    } catch (typeError)
+    {
+      this.venueAddress = "Venue Address Unavailable";
+    }
+
+    try {
+      this.venuePhone = this.detailRow._embedded.venues[0].boxOfficeInfo.phoneNumberDetail;
+
+      if (this.venuePhone == undefined || this.venuePhone == "Undefined")
+      {
+        throw new TypeError();
+      }
+    } catch (typeError)
+    {
+      this.venuePhone = "Venue Phone Number Unavailable";
+    }
+
+    try {
+      this.venueHours = this.detailRow._embedded.venues[0].boxOfficeInfo.openHoursDetail;
+
+      if (this.venueHours == undefined || this.venueHours == "Undefined")
+      {
+        throw new TypeError();
+      }
+    } catch (typeError)
+    {
+      this.venueHours = "Venue Hours Unavailable";
+    }
+
+    try {
+      this.venueRules = this.detailRow._embedded.venues[0].generalInfo.generalRule;
+
+      if (this.venueRules == undefined || this.venueRules == "Undefined")
+      {
+        throw new TypeError();
+      }
+    } catch (typeError)
+    {
+      this.venueRules = "Venue General Rules Unavailable";
+    }
+
+    try {
+      this.venueChildRules = this.detailRow._embedded.venues[0].generalInfo.childRule
+
+      if (this.venueChildRules == undefined || this.venueChildRules == "Undefined")
+      {
+        throw new TypeError();
+      }
+    } catch (typeError)
+    {
+      this.venueChildRules = "Venue Child Rules Unavailable";
+    }
+
+    try {
+      this.ticketStatus = this.detailRow.dates.status.code;
+
+      if (this.ticketStatus == undefined || this.ticketStatus == "Undefined") 
+      {
+        throw new TypeError();
+      }
+    } catch (typeError)
+    {
+      this.ticketStatus = "Ticket Status Unavailable";
+    }
+
+    try {
+      this.rowURL = this.detailRow.url;
+
+      if (this.rowURL == undefined || this.rowURL == "Undefined")
+      {
+        throw new TypeError();
+      }
+    } catch (typeError)
+    {
+      this.rowURL = "URL Unavailable";
+    }
+
+    try {
+      this.rowSeatmap = this.detailRow.seatmap.staticUrl;
+
+      if (this.rowSeatmap == undefined || this.rowSeatmap == "Undefined")
+      {
+        throw new TypeError();
+      }
+    } catch (typeError)
+    {
+      this.rowSeatmap = "https://upload.wikimedia.org/wikipedia/commons/d/d1/Image_not_available.png";
+    }
+
     console.log("Detailed Row: ");
     console.log(this.detailRow);
 
@@ -270,9 +518,9 @@ export class SearchBoxComponent {
 
     // if (this.hasAttractions)
     // {
-      for (let i = 0; i < this.detailRow._embedded.attractions.length; i++)
+      for (let i = 0; i < this.rowAttractions.length; i++)
       {
-        const artist = this.detailRow._embedded.attractions[i].name;
+        const artist = this.rowAttractions[i].name;
         //console.log("Artist is " + artist);
         TelephoneService.getSpotify(artist, this.phone.http, this);
       }
@@ -328,34 +576,34 @@ export class SearchBoxComponent {
 
   addFavorite(): void
   {
-    const date = this.detailRow.dates.start.localDate;
-    const event = this.detailRow.name;
+    const date = this.localDate;
+    const event = this.rowName;
 
     let category = "";
 
-    category += this.detailRow.classifications[0].genre.name + ' | ';
+    category += this.rowGenre + ' | ';
 
 
-    category += this.detailRow.classifications[0].segment.name + ' | ';
+    category += this.rowSegment + ' | ';
 
 
-    category += this.detailRow.classifications[0].subGenre.name + ' | ';
+    category += this.rowSubGenre + ' | ';
 
 
-    category += this.detailRow.classifications[0].type.name + ' | ';
+    category += this.rowType + ' | ';
 
-    category += this.detailRow.classifications[0].subType.name + ' | ';
+    category += this.rowSubType;
 
 
 
-    const venue = this.detailRow._embedded.venues[0].name;
+    const venue = this.venueName;
 
     TelephoneService.addFavorite(date, event, category, venue);
   }
 
   removeFavorite(): void
   {
-    TelephoneService.removeFavorite(this.detailRow.name);
+    TelephoneService.removeFavorite(this.rowName);
   }
 
   // hideLocation(): void {

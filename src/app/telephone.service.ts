@@ -44,6 +44,13 @@ export class TelephoneService {
   {
     const id = this.favoriteTable.length + 1;
     const newRow = {id, date, event, category, venue};
+    // let alreadyHere = false;
+
+    // for (let i = 0; i < this.favoriteTable.length; i++)
+    // {
+    //   if (this.favoriteTable[i]["])
+    // }
+
     this.favoriteTable.push(newRow);
 
     localStorage.setItem("favoriteTable", JSON.stringify(this.favoriteTable));

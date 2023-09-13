@@ -106,14 +106,18 @@
   
   <!-- /////////////////////////////////////////////////////// DETAIL BOX /////////////////////////////////////////////////////////// -->
   <ng-container *ngIf="detailBool">
-    <div class="container">
+    <div class="container" id="detailBox">
       <div class="row">
-        <a class="col" href="">&lt;Back</a>
+        <button id="backButton">
+          <a id="backLink" class="col" href="">&lt;Back</a>
+        </button>
       </div>
       <br>
       <div class="row container d-flex justify-content-center">
-        <h2 class="col-3" href="">{{detailRow.name}}</h2>
-        <button id="heartButton" class="col-1" type="button" (click)="addFavorite()">&hearts;</button>
+        <h2 class="col-3" href="">{{rowName}}</h2>
+        <button id="heartButton" class="col-1" type="button" (click)="addFavorite()">
+          <img src="../assets/heart-icon.png">
+        </button>
       </div>
       <br>
       <mat-tab-group mat-align-tabs="center" backgroundColor="primary" mat-stretch-tabs="false">
@@ -121,118 +125,132 @@
           <div class="row align-items-center">
             <div class="col-md-6">
               <div class="row">
-                <div class="col-sm-12 d-flex justify-content-center">
+                <h5 class="col-sm-12 d-flex justify-content-center">
                   Date
-                </div>
+                </h5>
               </div>
               <div class="row">
                 <div class="col-sm-12 d-flex justify-content-center">
-                  {{detailRow.dates.start.localDate}}
+                  {{localDate}}
                 </div>
               </div>
               <br>
               <div class="row">
-                <div class="col-sm-12 d-flex justify-content-center">
+                <h5 class="col-sm-12 d-flex justify-content-center">
                   Artist / Team
-                </div>
+                </h5>
               </div>
               <div class="row">
                 <div class="col-sm-12 d-flex justify-content-center">
-                  <ng-container *ngFor="let artist of detailRow._embedded.attractions; let i = index">
-                    {{artist.name + (i < detailRow._embedded.attractions.length - 1 ? ' | ' : '')}}
+                  <ng-container *ngFor="let artist of rowAttractions; let i = index">
+                    {{artist.name + (i < rowAttractions.length - 1 ? ' | ' : '')}}
                   </ng-container>
                 </div>
               </div>
               <br>
               <div class="row">
-                <div class="col-sm-12 d-flex justify-content-center">
+                <h5 class="col-sm-12 d-flex justify-content-center">
                   Venue
-                </div>
+                </h5>
               </div>
               <div class="row">
                 <div class="col-sm-12 d-flex justify-content-center">
-                  {{detailRow._embedded.venues[0].name}}
+                  {{venueName}}
                 </div>
               </div>
               <br>
               <div class="row">
-                <div class="col-sm-12 d-flex justify-content-center">
+                <h5 class="col-sm-12 d-flex justify-content-center">
                   Genres
-                </div>
+                </h5>
               </div>
               <div class="row">
                 <div class="col-sm-12 d-flex justify-content-center">
-                  {{detailRow.classifications[0].genre.name + ' | '}}
-                  {{detailRow.classifications[0].segment.name + ' | '}}
-                  {{detailRow.classifications[0].subGenre.name + ' | '}}
-                  {{detailRow.classifications[0].type.name + ' | '}}
-                  {{detailRow.classifications[0].subType.name + ' | '}}
+                  <ng-container *ngIf="rowGenre != 'Undefined'">
+                    {{rowGenre + ' | '}}
+                  </ng-container>
+                  <ng-container *ngIf="rowSegment != 'Undefined'">
+                    {{rowSegment + ' | '}}
+                  </ng-container>
+                  <ng-container *ngIf="rowSubGenre != 'Undefined'">
+                    {{rowSubGenre + ' | '}}
+                  </ng-container>
+                  <ng-container *ngIf="rowType != 'Undefined'">
+                    {{rowType + ' | '}}
+                  </ng-container>
+                  <ng-container *ngIf="rowSubType != 'Undefined'">
+                    {{rowSubType + ' | '}}
+                  </ng-container>
                 </div>
               </div>
               <br>
               <div class="row">
-                <div class="col-sm-12 d-flex justify-content-center">
+                <h5 class="col-sm-12 d-flex justify-content-center">
                   Price Ranges
-                </div>
+                </h5>
               </div>
               <div class="row">
                 <div class="col-sm-12 d-flex justify-content-center">
-                  {{detailRow.priceRanges[0].min + ' - ' + 
-                  detailRow.priceRanges[0].max + ' USD'}}
+                  {{rowPriceMin + ' - ' + 
+                  rowPriceMax + ' (USD)'}}
                 </div>
               </div>
               <br>
               <div class="row">
-                <div class="col-sm-12 d-flex justify-content-center">
+                <h5 class="col-sm-12 d-flex justify-content-center">
                   Ticket Status
-                </div>
+                </h5>
               </div>
               <div class="row">
                 <div class="col-sm-12 d-flex justify-content-center">
-                  <ng-container *ngIf="detailRow.dates.status.code == 'onsale'">
+                  <ng-container *ngIf="ticketStatus == 'onsale'">
                     <button class="btn btn-success">On Sale</button>
                   </ng-container>
-                  <ng-container *ngIf="detailRow.dates.status.code == 'rescheduled'">
+                  <ng-container *ngIf="ticketStatus == 'rescheduled'">
                     <button class="btn btn-warning">Rescheduled</button>
                   </ng-container>
-                  <ng-container *ngIf="detailRow.dates.status.code == 'offsale'">
+                  <ng-container *ngIf="ticketStatus == 'offsale'">
                     <button class="btn btn-danger">Off Sale</button>
                   </ng-container>
-                  <ng-container *ngIf="detailRow.dates.status.code == 'cancelled'">
+                  <ng-container *ngIf="ticketStatus == 'cancelled'">
                     <button class="btn btn-dark">Cancelled</button>
                   </ng-container>
-                  <ng-container *ngIf="detailRow.dates.status.code == 'postponed'">
+                  <ng-container *ngIf="ticketStatus == 'postponed'">
                     <button class="btn btn-warning">Rescheduled</button>
                   </ng-container>
                 </div>
               </div>
               <br>
               <div class="row">
-                <div class="col-sm-12 d-flex justify-content-center">
+                <h5 class="col-sm-12 d-flex justify-content-center">
                   Buy Ticket At:
-                </div>
+                </h5>
               </div>
               <div class="row">
                 <div class="col-sm-12 d-flex justify-content-center">
-                  <a [href]="detailRow.url">Ticketmaster</a>
+                  <a [href]="rowURL">Ticketmaster</a>
                 </div>
               </div>
               <br>
             </div>
     
             <div class="col-md-6">
-              <img [src]="detailRow.seatmap.staticUrl">
+              <img [src]="rowSeatmap">
             </div>
           </div>
           <div class="row d-flex justify-content-center">
             Share on: 
             <div class="col-1">
-              <button><a href="https://twitter.com/intent/tweet?text=Check%20{{detailRow.name}}%20on%20Ticketmaster,{{detailRow.url}}" target="_blank">Twitter</a>
-              </button>     
+              <a href="https://twitter.com/intent/tweet?text=Check%20{{rowName}}%20on%20Ticketmaster,{{rowURL}}" target="_blank">
+                <img class="icon" src="../assets/twitter-icon.png">
+              </a>
+              <a href="https://www.facebook.com/sharer/sharer.php?u={{rowURL}}&amp;src=sdkpreparse" target="_blank">
+                <img class="icon" src="../assets/facebook-icon.png">
+              </a>
             </div>
-            <div class="col-1">
-              <button type="button" data-href="https://hw8-380107.wl.r.appspot.com/"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hw8-380107.wl.r.appspot.com/&amp;src=sdkpreparse">Facebook</a></button>
-            </div>
+            <!-- <div class="col-1">
+
+            </div> -->
   
             
             
@@ -240,7 +258,7 @@
             </button>     -->
           </div>
         </mat-tab>
-        <mat-tab label="Artist/Teams" class="container">
+        <mat-tab label="Artist/Team" class="container">
           <div id="carouselExampleControls" class="carousel slide" data-interval="false" data-bs-ride="carousel">
             <div class="carousel-inner">
               <ng-container *ngFor="let artist of spotifyResult; let i = index">
@@ -250,7 +268,7 @@
                     <div class="row">
                       <div class="col-2  d-flex justify-content-center">
                         <figure class="figure">
-                          <img [src]="artist.images[0].url" class="figure-img img-fluid rounded">
+                          <img class="artistProfile" [src]="artist.images[0].url" class="figure-img img-fluid rounded">
                           <figcaption class="figure-caption">{{artist.name}}</figcaption>
                         </figure>
               
@@ -258,15 +276,15 @@
                       <br>
                       <div class="col-9  align-self-center">
                         <div class="row align-items-center">
-                          <div class="col-4 ">
+                          <h5 class="col-4 ">
                             Popularity
-                          </div>
-                          <div class="col-4 ">
+                          </h5>
+                          <h5 class="col-4 ">
                             Followers
-                          </div>
-                          <div class="col-4 ">
+                          </h5>
+                          <h5 class="col-4 ">
                             Spotify Link
-                          </div>
+                          </h5>
                         </div>
                         <div class="row align-items-center">
                           <div class="col-4 ">
@@ -276,7 +294,9 @@
                             {{artist.followers.total}}
                           </div>
                           <div class="col-4 ">
-                            <a [href]="artist.external_urls.spotify">Icon here</a>
+                            <a [href]="artist.external_urls.spotify">
+                              <img class="icon" src="../assets/Spotify-Icon.png">
+                            </a>
                           </div>
                         </div>
                       </div>
@@ -284,24 +304,25 @@
               <br>
                     <div class="row">
                       <div class="col-12">
-                        Album Featuring (artist)
+                        Albums Featuring {{artist.name}}
                       </div>
                     </div>
+                    <br>
               
                     <div class = "row">
                       <div class="col-4">
                         <ng-container *ngIf="albumsLoaded">
-                          <img [src]="albums[i][0]">
+                          <img class="album" [src]="albums[i][0]">
                         </ng-container>
                       </div>
                       <div class="col-4">
                         <ng-container *ngIf="albumsLoaded">
-                          <img [src]="albums[i][1]">
+                          <img class="album" [src]="albums[i][1]">
                         </ng-container>
                       </div>
                       <div class="col-4">
                         <ng-container *ngIf="albumsLoaded">
-                          <img [src]="albums[i][2]">
+                          <img class="album" [src]="albums[i][2]">
                         </ng-container>
                       </div>
                     </div>
@@ -313,7 +334,7 @@
                     <div class="row">
                       <div class="col-2  d-flex justify-content-center">
                         <figure class="figure">
-                          <img [src]="artist.images[0].url" class="figure-img img-fluid rounded">
+                          <img class="artistProfile" [src]="artist.images[0].url" class="figure-img img-fluid rounded">
                           <figcaption class="figure-caption">{{artist.name}}</figcaption>
                         </figure>
               
@@ -339,7 +360,9 @@
                             {{artist.followers.total}}
                           </div>
                           <div class="col-4 ">
-                            <a [href]="artist.external_urls.spotify">Icon here</a>
+                            <a [href]="artist.external_urls.spotify">
+                              <img class="icon" src="../assets/Spotify-Icon.png">
+                            </a>
                           </div>
                         </div>
                       </div>
@@ -347,24 +370,25 @@
               <br>
                     <div class="row">
                       <div class="col-12">
-                        Album Featuring (artist)
+                        Albums Featuring {{artist.name}}
                       </div>
                     </div>
+                    <br>
               
                     <div class = "row">
                       <div class="col-4">
                         <ng-container *ngIf="albumsLoaded">
-                          <img [src]="albums[i][0]">
+                          <img class="album" [src]="albums[i][0]">
                         </ng-container>
                       </div>
                       <div class="col-4">
                         <ng-container *ngIf="albumsLoaded">
-                          <img [src]="albums[i][1]">
+                          <img class="album" [src]="albums[i][1]">
                         </ng-container>
                       </div>
                       <div class="col-4">
                         <ng-container *ngIf="albumsLoaded">
-                          <img [src]="albums[i][2]">
+                          <img class="album" [src]="albums[i][2]">
                         </ng-container>
                       </div>
                     </div>
@@ -411,52 +435,52 @@
           <div class="row">
             <div class="col-6 border">
               <div class="row">
-                <div class="col-12 d-flex justify-content-center">
+                <h5 class="col-12 d-flex justify-content-center">
                   Name
-                </div>
+                </h5>
               </div>
               <div class="row">
                 <div class="col-12 d-flex justify-content-center">
-                  {{detailRow._embedded.venues[0].name}}
+                  {{venueName}}
                 </div>
               </div>
               <br>
               <div class="row">
-                <div class="col-12 d-flex justify-content-center">
+                <h5 class="col-12 d-flex justify-content-center">
                   Address
-                </div>
+                </h5>
               </div>
               <div class="row">
                 <div class="col-12 d-flex justify-content-center">
-                  {{detailRow._embedded.venues[0].address.line1}}
+                  {{venueAddress}}
                 </div>
               </div>
               <br>
               <div class="row">
-                <div class="col-12 d-flex justify-content-center">
+                <h5 class="col-12 d-flex justify-content-center">
                   Phone Number
-                </div>
+                </h5>
               </div>
               <div class="row">
                 <div class="col-12 d-flex justify-content-center">
-                  {{detailRow._embedded.venues[0].boxOfficeInfo.phoneNumberDetail}}
+                  {{venuePhone}}
                 </div>
               </div>
             </div>
             <div class="col-6 border">
               <div class="row">
-                <div class="col-12 d-flex justify-content-center">
+                <h5 class="col-12 d-flex justify-content-center">
                   Open Hours
-                </div>
+                </h5>
               </div>
               <div class="row">
                 <div class="col-12 d-flex justify-content-center">
                   <ng-container *ngIf="!showHoursDetail; else hoursElse">
-                    <div class="module line-clamp"><p>{{detailRow._embedded.venues[0].boxOfficeInfo.openHoursDetail}}</p></div>
+                    <div class="module line-clamp"><p>{{venueHours}}</p></div>
                   </ng-container>
                   <ng-template #hoursElse>
                     <ng-container *ngIf="showHoursDetail">
-                      {{detailRow._embedded.venues[0].boxOfficeInfo.openHoursDetail}}
+                      {{venueHours}}
                     </ng-container>
                   </ng-template>
                 </div>
@@ -475,18 +499,18 @@
               </div>
               <br>
               <div class="row">
-                <div class="col-12 d-flex justify-content-center">
-                  General Rule
-                </div>
+                <h5 class="col-12 d-flex justify-content-center">
+                  General Rules
+                </h5>
               </div>
               <div class="row">
                 <div class="col-12 d-flex justify-content-center">
                   <ng-container *ngIf="!showGeneralDetail; else generalElse">
-                    <div class="module line-clamp"><p>{{detailRow._embedded.venues[0].generalInfo.generalRule}}</p></div>
+                    <div class="module line-clamp"><p>{{venueRules}}</p></div>
                   </ng-container>
                   <ng-template #generalElse>
                     <ng-container *ngIf="showGeneralDetail">
-                      <div><p>{{detailRow._embedded.venues[0].generalInfo.generalRule}}</p></div>
+                      <div><p>{{venueRules}}</p></div>
                     </ng-container>
                   </ng-template>
                 </div>
@@ -505,18 +529,18 @@
               </div>
               <br>
               <div class="row">
-                <div class="col-12 d-flex justify-content-center">
-                  Child Rule
-                </div>
+                <h5 class="col-12 d-flex justify-content-center">
+                  Child Rules
+                </h5>
               </div>
               <div class="row">
                 <div class="col-12 d-flex justify-content-center">
                   <ng-container *ngIf="!showChildDetail; else childElse">
-                    <div class="module line-clamp"><p>{{detailRow._embedded.venues[0].generalInfo.childRule}}</p></div>
+                    <div class="module line-clamp"><p>{{venueChildRules}}</p></div>
                   </ng-container>
                   <ng-template #childElse>
                     <ng-container *ngIf="showChildDetail">
-                      <div><p>{{detailRow._embedded.venues[0].generalInfo.childRule}}</p></div>
+                      <div><p>{{venueChildRules}}</p></div>
                     </ng-container>
                   </ng-template>
                 </div>
@@ -573,7 +597,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Modal title</h5>
+          <h5 class="modal-title">{{venueName}}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">

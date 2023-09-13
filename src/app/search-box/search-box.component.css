@@ -22,10 +22,12 @@ td img {
 
 h2 {
   text-align:center;
+  width:80%;
 }
 
 #heartButton {
   max-width: 45px;
+  border-radius: 100%;
 }
 
 .col-3 {
@@ -76,3 +78,67 @@ table {
   overflow: hidden;
 }
 
+#detailBox {
+  background-color: rgba(145, 145, 145, 0.5);
+  border-radius: 10px;
+  color: white;
+  padding-bottom:30px;
+}
+
+h5 {
+  color: rgb(59, 198, 171);
+}
+
+figcaption {
+  color: white;
+}
+
+.modal-content {
+  background-color: rgb(61, 61, 61);
+}
+
+.modal-title {
+  color:white;
+}
+
+.pseudoLink {
+  color: rgb(59, 198, 171);
+  text-decoration: underline;
+  cursor:pointer;
+}
+
+.icon {
+  max-width: 40px;
+  max-height: 40px;
+}
+
+#backButton {
+  border-radius: 15px;
+  background-color: rgb(32, 121, 199);
+  max-width:100px;
+}
+
+#backLink {
+  color:white;
+  text-decoration:none;
+}
+
+#backLink:hover {
+  text-decoration:underline;
+}
+
+#dataTable {
+  cursor:pointer;
+}
+
+.album {
+  width: 2in;
+  height: 2in;
+  border-radius:5px;
+}
+
+.artistProfile {
+  width: 2.5in;
+  height: 2.5in;
+  border-radius:5px;
+}
