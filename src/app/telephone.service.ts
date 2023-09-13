@@ -26,6 +26,12 @@ export class TelephoneService {
   {
     console.log("initiation called");
     this.favoriteTable = JSON.parse(localStorage.getItem("favoriteTable"));
+
+    if (this.favoriteTable == null)
+    {
+      this.favoriteTable = [];
+    }
+
     console.log("this.favoriteTable");
 
     console.log("favorite table initiated to");
