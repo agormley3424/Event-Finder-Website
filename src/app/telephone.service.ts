@@ -107,9 +107,9 @@ export class TelephoneService {
       //console.log(Object.values(response)[5]);
       //this.ip = Object.values(response)[5];
       //JSON.stringify(response);
-      console.log(TelephoneService.responseToJSON(response)["loc"]);
+      console.log(TelephoneService.responseToJSON(response).loc);
 
-      TelephoneService.ip = TelephoneService.responseToJSON(response)["loc"];
+      TelephoneService.ip = TelephoneService.responseToJSON(response).loc;
       console.log(TelephoneService.ip);
     })
   }
@@ -137,7 +137,7 @@ export class TelephoneService {
     .subscribe((response) => {
       //console.log(TelephoneService.responseToJSON(response));
       TelephoneService.ticketMasterJSON = TelephoneService.responseToJSON(response);
-      caller.searchResults = TelephoneService.ticketMasterJSON["_embedded"]["events"];
+      caller.searchResults = TelephoneService.ticketMasterJSON._embedded.events;
       console.log(caller.searchResults);
     })
   }
@@ -154,7 +154,7 @@ export class TelephoneService {
     .subscribe((response) => {
       //console.log(TelephoneService.responseToJSON(response));
       TelephoneService.ticketMasterJSON = TelephoneService.responseToJSON(response);
-      caller.searchResults = TelephoneService.ticketMasterJSON["_embedded"]["events"];
+      caller.searchResults = TelephoneService.ticketMasterJSON._embedded.events;
       console.log(caller.searchResults);
     })
   }
@@ -177,12 +177,12 @@ export class TelephoneService {
       
       //console.log(this.spotifyJSON["artists"]["items"]);
       //console.log("Artist is " + artist);
-      for (let i = 0; i < this.spotifyJSON["artists"]["items"].length; i++)
+      for (let i = 0; i < this.spotifyJSON.artists.items.length; i++)
       {
         //console.log(this.spotifyJSON["artists"]["items"][i]["name"]);
-        if (this.spotifyJSON["artists"]["items"][i]["name"] == artist)
+        if (this.spotifyJSON.artists.items[i].name == artist)
         {
-          caller.spotifyResult.push(TelephoneService.spotifyJSON["artists"]["items"][i]);
+          caller.spotifyResult.push(TelephoneService.spotifyJSON.artists.items[i]);
           //console.log("Matching search is " + TelephoneService.spotifyJSON["artists"]["items"][i]["name"]);
           
           break;
@@ -203,13 +203,13 @@ export class TelephoneService {
 
     http.get(stringDest)
     .subscribe((response) => {
-      const responseJSON = TelephoneService.responseToJSON(response)['items'];
+      const responseJSON = TelephoneService.responseToJSON(response).items;
 
       //console.log("Album response JSON: " + responseJSON);
 
       for (let i = 0; i < responseJSON.length; i++)
       {
-        caller.albums[index].push(responseJSON[i]['images'][0]['url']);
+        caller.albums[index].push(responseJSON[i].images[0].url);
       }
     })
   }
