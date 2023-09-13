@@ -150,6 +150,8 @@ export class TelephoneService {
     stringDest += "&location=" + this.stringToAddress(location);
     stringDest += "&locationSearch=true";
 
+    console.log("API Call: " + stringDest);
+
     http.get(stringDest)
     .subscribe((response) => {
       //console.log(TelephoneService.responseToJSON(response));

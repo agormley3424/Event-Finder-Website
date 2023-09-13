@@ -174,6 +174,9 @@ export class SearchBoxComponent {
     this.detailRow = this.searchResults[index];
     this.detailBool = true;
 
+    console.log("Detailed Row: ");
+    console.log(this.detailRow);
+
     this.coordinates = {lat: parseFloat(TelephoneService.ticketMasterJSON._embedded.events[0]._embedded.venues[0].location.latitude),
     lng: parseFloat(TelephoneService.ticketMasterJSON._embedded.events[0]._embedded.venues[0].location.longitude)};
 
