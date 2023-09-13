@@ -87,11 +87,11 @@
         <ng-container *ngFor="let row of searchResults; let i = index">
           <tr #self (click)="showDetails(self)">
             <div hidden>{{i}}</div>
-            <td>{{row['dates']['start']['localDate']}} <br> {{row['dates']['start']['localTime']}}</td>
-            <td><img src="{{row['images'][0]['url']}}"></td>
-            <td>{{row['name']}}</td>
-            <td>{{row['classifications'][0]['segment']['name']}}</td>
-            <td>{{row['_embedded']['venues'][0]['name']}}</td>
+            <td>{{row.dates.start.localDate}} <br> {{row.dates.start.localTime}}</td>
+            <td><img src="{{row.images[0].url}}"></td>
+            <td>{{row.name}}</td>
+            <td>{{row.classifications[0].segment.name}}</td>
+            <td>{{row._embedded.venues[0].name}}</td>
           </tr>
         </ng-container>
       </thead>
@@ -106,7 +106,7 @@
       </div>
       <br>
       <div class="row container d-flex justify-content-center">
-        <h2 class="col-3" href="">{{detailRow['name']}}</h2>
+        <h2 class="col-3" href="">{{detailRow.name}}</h2>
         <button id="heartButton" class="col-1" type="button" (click)="addFavorite()">&hearts;</button>
       </div>
       <br>
@@ -121,7 +121,7 @@
               </div>
               <div class="row">
                 <div class="col-sm-12 d-flex justify-content-center">
-                  {{detailRow['dates']['start']['localDate']}}
+                  {{detailRow.dates.start.localDate}}
                 </div>
               </div>
               <br>
@@ -133,12 +133,12 @@
               <div class="row">
                 <div class="col-sm-12 d-flex justify-content-center">
                   <ng-container *ngIf="hasAttractions; else elseAttractions">
-                    <ng-container *ngFor="let artist of detailRow['_embedded']['attractions']; let i = index">
-                      {{artist['name'] + (i < detailRow['_embedded']['attractions'].length - 1 ? ' | ' : '')}}
+                    <ng-container *ngFor="let artist of detailRow._embedded.attractions; let i = index">
+                      {{artist.name + (i < detailRow._embedded.attractions.length - 1 ? ' | ' : '')}}
                     </ng-container>
                   </ng-container>
                   <ng-template #elseAttractions>
-                    {{detailRow['info']}}
+                    {{detailRow.info}}
                   </ng-template>
   
                 </div>
@@ -151,7 +151,7 @@
               </div>
               <div class="row">
                 <div class="col-sm-12 d-flex justify-content-center">
-                  {{detailRow['_embedded']['venues'][0]['name']}}
+                  {{detailRow._embedded.venues[0].name}}
                 </div>
               </div>
               <br>
@@ -163,19 +163,19 @@
               <div class="row">
                 <div class="col-sm-12 d-flex justify-content-center">
                   <ng-container *ngIf="hasGenre">
-                    {{detailRow['classifications'][0]['genre']['name'] + ' | '}}
+                    {{detailRow.classifications[0].genre.name + ' | '}}
                   </ng-container>
                   <ng-container *ngIf="hasSegment">
-                    {{detailRow['classifications'][0]['segment']['name'] + ' | '}}
+                    {{detailRow.classifications[0].segment.name + ' | '}}
                   </ng-container>
                   <ng-container *ngIf="hasSubGenre">
-                    {{detailRow['classifications'][0]['subGenre']['name'] + ' | '}}
+                    {{detailRow.classifications[0].subGenre.name + ' | '}}
                   </ng-container>
                   <ng-container *ngIf="hasType">
-                    {{detailRow['classifications'][0]['type']['name'] + ' | '}}
+                    {{detailRow.classifications[0].type.name + ' | '}}
                   </ng-container>
                   <ng-container *ngIf="hasSubType">
-                    {{detailRow['classifications'][0]['subType']['name'] + ' | '}}
+                    {{detailRow.classifications[0].subType.name + ' | '}}
                   </ng-container>
                 </div>
               </div>
@@ -188,8 +188,8 @@
               <div class="row">
                 <div class="col-sm-12 d-flex justify-content-center">
                   <ng-container *ngIf="hasPriceRange">
-                    {{detailRow['priceRanges'][0]['min'] + ' - ' + 
-                    detailRow['priceRanges'][0]['max'] + ' USD'}}
+                    {{detailRow.priceRanges[0].min + ' - ' + 
+                    detailRow.priceRanges[0].max + ' USD'}}
                   </ng-container>
                 </div>
               </div>
@@ -201,19 +201,19 @@
               </div>
               <div class="row">
                 <div class="col-sm-12 d-flex justify-content-center">
-                  <ng-container *ngIf="detailRow['dates']['status']['code'] == 'onsale'">
+                  <ng-container *ngIf="detailRow.dates.status.code == 'onsale'">
                     <button class="btn btn-success">On Sale</button>
                   </ng-container>
-                  <ng-container *ngIf="detailRow['dates']['status']['code'] == 'rescheduled'">
+                  <ng-container *ngIf="detailRow.dates.status.code == 'rescheduled'">
                     <button class="btn btn-warning">Rescheduled</button>
                   </ng-container>
-                  <ng-container *ngIf="detailRow['dates']['status']['code'] == 'offsale'">
+                  <ng-container *ngIf="detailRow.dates.status.code == 'offsale'">
                     <button class="btn btn-danger">Off Sale</button>
                   </ng-container>
-                  <ng-container *ngIf="detailRow['dates']['status']['code'] == 'cancelled'">
+                  <ng-container *ngIf="detailRow.dates.status.code == 'cancelled'">
                     <button class="btn btn-dark">Cancelled</button>
                   </ng-container>
-                  <ng-container *ngIf="detailRow['dates']['status']['code'] == 'postponed'">
+                  <ng-container *ngIf="detailRow.dates.status.code == 'postponed'">
                     <button class="btn btn-warning">Rescheduled</button>
                   </ng-container>
                 </div>
@@ -226,20 +226,20 @@
               </div>
               <div class="row">
                 <div class="col-sm-12 d-flex justify-content-center">
-                  <a [href]="detailRow['url']">Ticketmaster</a>
+                  <a [href]="detailRow.url">Ticketmaster</a>
                 </div>
               </div>
               <br>
             </div>
     
             <div class="col-md-6">
-              <img [src]="detailRow['seatmap']['staticUrl']">
+              <img [src]="detailRow.seatmap.staticUrl">
             </div>
           </div>
           <div class="row d-flex justify-content-center">
             Share on: 
             <div class="col-1">
-              <button><a href="https://twitter.com/intent/tweet?text=Check%20{{detailRow['name']}}%20on%20Ticketmaster,{{detailRow['url']}}" target="_blank">Twitter</a>
+              <button><a href="https://twitter.com/intent/tweet?text=Check%20{{detailRow.name}}%20on%20Ticketmaster,{{detailRow.url}}" target="_blank">Twitter</a>
               </button>     
             </div>
             <div class="col-1">
@@ -262,8 +262,8 @@
                     <div class="row">
                       <div class="col-2  d-flex justify-content-center">
                         <figure class="figure">
-                          <img [src]="artist['images'][0]['url']" class="figure-img img-fluid rounded">
-                          <figcaption class="figure-caption">{{artist['name']}}</figcaption>
+                          <img [src]="artist.images[0].url" class="figure-img img-fluid rounded">
+                          <figcaption class="figure-caption">{{artist.name}}</figcaption>
                         </figure>
               
                       </div>
@@ -282,13 +282,13 @@
                         </div>
                         <div class="row align-items-center">
                           <div class="col-4 ">
-                            {{artist['popularity']}}
+                            {{artist.popularity}}
                           </div>
                           <div class="col-4 ">
-                            {{artist['followers']['total']}}
+                            {{artist.followers.total}}
                           </div>
                           <div class="col-4 ">
-                            <a [href]="artist['external_urls']['spotify']">Icon here</a>
+                            <a [href]="artist.external_urls.spotify">Icon here</a>
                           </div>
                         </div>
                       </div>
@@ -325,8 +325,8 @@
                     <div class="row">
                       <div class="col-2  d-flex justify-content-center">
                         <figure class="figure">
-                          <img [src]="artist['images'][0]['url']" class="figure-img img-fluid rounded">
-                          <figcaption class="figure-caption">{{artist['name']}}</figcaption>
+                          <img [src]="artist.images[0].url" class="figure-img img-fluid rounded">
+                          <figcaption class="figure-caption">{{artist.name}}</figcaption>
                         </figure>
               
                       </div>
@@ -345,13 +345,13 @@
                         </div>
                         <div class="row align-items-center">
                           <div class="col-4 ">
-                            {{artist['popularity']}}
+                            {{artist.popularity}}
                           </div>
                           <div class="col-4 ">
-                            {{artist['followers']['total']}}
+                            {{artist.followers.total}}
                           </div>
                           <div class="col-4 ">
-                            <a [href]="artist['external_urls']['spotify']">Icon here</a>
+                            <a [href]="artist.external_urls.spotify">Icon here</a>
                           </div>
                         </div>
                       </div>
@@ -429,7 +429,7 @@
               </div>
               <div class="row">
                 <div class="col-12 d-flex justify-content-center">
-                  {{detailRow['_embedded']['venues'][0]['name']}}
+                  {{detailRow._embedded.venues[0].name}}
                 </div>
               </div>
               <br>
@@ -440,7 +440,7 @@
               </div>
               <div class="row">
                 <div class="col-12 d-flex justify-content-center">
-                  {{detailRow['_embedded']['venues'][0]['address']['line1']}}
+                  {{detailRow._embedded.venues[0].address.line1}}
                 </div>
               </div>
               <br>
@@ -452,7 +452,7 @@
               <div class="row">
                 <div class="col-12 d-flex justify-content-center">
                   <ng-container *ngIf="hasBoxOffice">
-                    {{detailRow['_embedded']['venues'][0]['boxOfficeInfo']['phoneNumberDetail']}}
+                    {{detailRow._embedded.venues[0].boxOfficeInfo.phoneNumberDetail}}
                   </ng-container>
                 </div>
               </div>
@@ -466,11 +466,11 @@
               <div class="row">
                 <div class="col-12 d-flex justify-content-center">
                   <ng-container *ngIf="hasBoxOffice && !showHoursDetail; else hoursElse">
-                    <div class="module line-clamp"><p>{{detailRow['_embedded']['venues'][0]['boxOfficeInfo']['openHoursDetail']}}</p></div>
+                    <div class="module line-clamp"><p>{{detailRow._embedded.venues[0].boxOfficeInfo.openHoursDetail}}</p></div>
                   </ng-container>
                   <ng-template #hoursElse>
                     <ng-container *ngIf="hasBoxOffice && showHoursDetail">
-                      {{detailRow['_embedded']['venues'][0]['boxOfficeInfo']['openHoursDetail']}}
+                      {{detailRow._embedded.venues[0].boxOfficeInfo.openHoursDetail}}
                     </ng-container>
                   </ng-template>
                 </div>
@@ -496,11 +496,11 @@
               <div class="row">
                 <div class="col-12 d-flex justify-content-center">
                   <ng-container *ngIf="hasGeneralInfo && !showGeneralDetail; else generalElse">
-                    <div class="module line-clamp"><p>{{detailRow['_embedded']['venues'][0]['generalInfo']['generalRule']}}</p></div>
+                    <div class="module line-clamp"><p>{{detailRow._embedded.venues[0].generalInfo.generalRule}}</p></div>
                   </ng-container>
                   <ng-template #generalElse>
                     <ng-container *ngIf="hasGeneralInfo && showGeneralDetail">
-                      <div><p>{{detailRow['_embedded']['venues'][0]['generalInfo']['generalRule']}}</p></div>
+                      <div><p>{{detailRow._embedded.venues[0].generalInfo.generalRule}}</p></div>
                     </ng-container>
                   </ng-template>
                 </div>
@@ -526,11 +526,11 @@
               <div class="row">
                 <div class="col-12 d-flex justify-content-center">
                   <ng-container *ngIf="hasGeneralInfo && !showChildDetail; else childElse">
-                    <div class="module line-clamp"><p>{{detailRow['_embedded']['venues'][0]['generalInfo']['childRule']}}</p></div>
+                    <div class="module line-clamp"><p>{{detailRow._embedded.venues[0].generalInfo.childRule}}</p></div>
                   </ng-container>
                   <ng-template #childElse>
                     <ng-container *ngIf="hasGeneralInfo && showChildDetail">
-                      <div><p>{{detailRow['_embedded']['venues'][0]['generalInfo']['childRule']}}</p></div>
+                      <div><p>{{detailRow._embedded.venues[0].generalInfo.childRule}}</p></div>
                     </ng-container>
                   </ng-template>
                 </div>
