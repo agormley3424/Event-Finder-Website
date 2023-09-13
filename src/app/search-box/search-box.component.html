@@ -84,11 +84,11 @@
     <table id="dataTable" class="table table-striped table-dark">
       <thead>
         <tr>
-          <th>Date</th>
-          <th>Icon</th>
-          <th >Event</th>
-          <th >Genre</th>
-          <th >Venue</th>
+          <th><h5>Date</h5></th>
+          <th><h5>Icon</h5></th>
+          <th ><h5>Event</h5></th>
+          <th ><h5>Genre</h5></th>
+          <th ><h5>Venue</h5></th>
         </tr>
         <ng-container *ngFor="let row of searchResults; let i = index">
           <tr #self (click)="showDetails(self)">
@@ -259,153 +259,158 @@
           </div>
         </mat-tab>
         <mat-tab label="Artist/Team" class="container">
-          <div id="carouselExampleControls" class="carousel slide" data-interval="false" data-bs-ride="carousel">
-            <div class="carousel-inner">
-              <ng-container *ngFor="let artist of spotifyResult; let i = index">
-                <ng-container *ngIf="i == 0; else carouselElse">
-                  <div class="carousel-item active">
-                    <br>
-                    <div class="row">
-                      <div class="col-2  d-flex justify-content-center">
-                        <figure class="figure">
-                          <img class="artistProfile" [src]="artist.images[0].url" class="figure-img img-fluid rounded">
-                          <figcaption class="figure-caption">{{artist.name}}</figcaption>
-                        </figure>
-              
-                      </div>
+          <ng-container *ngIf="spotifyResult.length > 0; else artistElse">
+            <div id="carouselExampleControls" class="carousel slide" data-interval="false" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <ng-container *ngFor="let artist of spotifyResult; let i = index">
+                  <ng-container *ngIf="i == 0; else carouselElse">
+                    <div class="carousel-item active">
                       <br>
-                      <div class="col-9  align-self-center">
-                        <div class="row align-items-center">
-                          <h5 class="col-4 ">
-                            Popularity
-                          </h5>
-                          <h5 class="col-4 ">
-                            Followers
-                          </h5>
-                          <h5 class="col-4 ">
-                            Spotify Link
-                          </h5>
-                        </div>
-                        <div class="row align-items-center">
-                          <div class="col-4 ">
-                            {{artist.popularity}}
-                          </div>
-                          <div class="col-4 ">
-                            {{artist.followers.total}}
-                          </div>
-                          <div class="col-4 ">
-                            <a [href]="artist.external_urls.spotify">
-                              <img class="icon" src="../assets/Spotify-Icon.png">
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-              <br>
-                    <div class="row">
-                      <div class="col-12">
-                        Albums Featuring {{artist.name}}
-                      </div>
-                    </div>
-                    <br>
-              
-                    <div class = "row">
-                      <div class="col-4">
-                        <ng-container *ngIf="albumsLoaded">
-                          <img class="album" [src]="albums[i][0]">
-                        </ng-container>
-                      </div>
-                      <div class="col-4">
-                        <ng-container *ngIf="albumsLoaded">
-                          <img class="album" [src]="albums[i][1]">
-                        </ng-container>
-                      </div>
-                      <div class="col-4">
-                        <ng-container *ngIf="albumsLoaded">
-                          <img class="album" [src]="albums[i][2]">
-                        </ng-container>
-                      </div>
-                    </div>
-                  </div>
-                </ng-container>
-                <ng-template #carouselElse>
-                  <div class="carousel-item">
-                    <br>
-                    <div class="row">
-                      <div class="col-2  d-flex justify-content-center">
-                        <figure class="figure">
-                          <img class="artistProfile" [src]="artist.images[0].url" class="figure-img img-fluid rounded">
-                          <figcaption class="figure-caption">{{artist.name}}</figcaption>
-                        </figure>
-              
-                      </div>
-                      <br>
-                      <div class="col-9  align-self-center">
-                        <div class="row align-items-center">
-                          <div class="col-4 ">
-                            Popularity
-                          </div>
-                          <div class="col-4 ">
-                            Followers
-                          </div>
-                          <div class="col-4 ">
-                            Spotify Link
-                          </div>
-                        </div>
-                        <div class="row align-items-center">
-                          <div class="col-4 ">
-                            {{artist.popularity}}
-                          </div>
-                          <div class="col-4 ">
-                            {{artist.followers.total}}
-                          </div>
-                          <div class="col-4 ">
-                            <a [href]="artist.external_urls.spotify">
-                              <img class="icon" src="../assets/Spotify-Icon.png">
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-              <br>
-                    <div class="row">
-                      <div class="col-12">
-                        Albums Featuring {{artist.name}}
-                      </div>
-                    </div>
-                    <br>
-              
-                    <div class = "row">
-                      <div class="col-4">
-                        <ng-container *ngIf="albumsLoaded">
-                          <img class="album" [src]="albums[i][0]">
-                        </ng-container>
-                      </div>
-                      <div class="col-4">
-                        <ng-container *ngIf="albumsLoaded">
-                          <img class="album" [src]="albums[i][1]">
-                        </ng-container>
-                      </div>
-                      <div class="col-4">
-                        <ng-container *ngIf="albumsLoaded">
-                          <img class="album" [src]="albums[i][2]">
-                        </ng-container>
-                      </div>
-                    </div>
-                  </div>
-                </ng-template>
+                      <div class="row">
+                        <div class="col-2  d-flex justify-content-center">
+                          <figure class="figure">
+                            <img class="artistProfile" [src]="artist.images[0].url" class="figure-img img-fluid rounded">
+                            <figcaption class="figure-caption">{{artist.name}}</figcaption>
+                          </figure>
                 
-              </ng-container>
+                        </div>
+                        <br>
+                        <div class="col-9  align-self-center">
+                          <div class="row align-items-center">
+                            <h5 class="col-4 ">
+                              Popularity
+                            </h5>
+                            <h5 class="col-4 ">
+                              Followers
+                            </h5>
+                            <h5 class="col-4 ">
+                              Spotify Link
+                            </h5>
+                          </div>
+                          <div class="row align-items-center">
+                            <div class="col-4 ">
+                              {{artist.popularity}}
+                            </div>
+                            <div class="col-4 ">
+                              {{artist.followers.total}}
+                            </div>
+                            <div class="col-4 ">
+                              <a [href]="artist.external_urls.spotify">
+                                <img class="icon" src="../assets/Spotify-Icon.png">
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                <br>
+                      <div class="row">
+                        <h5 class="col-12">
+                          Albums Featuring {{artist.name}}
+                        </h5>
+                      </div>
+                      <br>
+                
+                      <div class = "row">
+                        <div class="col-4">
+                          <ng-container *ngIf="albumsLoaded">
+                            <img class="album" [src]="albums[i][0]">
+                          </ng-container>
+                        </div>
+                        <div class="col-4">
+                          <ng-container *ngIf="albumsLoaded">
+                            <img class="album" [src]="albums[i][1]">
+                          </ng-container>
+                        </div>
+                        <div class="col-4">
+                          <ng-container *ngIf="albumsLoaded">
+                            <img class="album" [src]="albums[i][2]">
+                          </ng-container>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-container>
+                  <ng-template #carouselElse>
+                    <div class="carousel-item">
+                      <br>
+                      <div class="row">
+                        <div class="col-2  d-flex justify-content-center">
+                          <figure class="figure">
+                            <img class="artistProfile" [src]="artist.images[0].url" class="figure-img img-fluid rounded">
+                            <figcaption class="figure-caption">{{artist.name}}</figcaption>
+                          </figure>
+                
+                        </div>
+                        <br>
+                        <div class="col-9  align-self-center">
+                          <div class="row align-items-center">
+                            <h5 class="col-4 ">
+                              Popularity
+                            </h5>
+                            <h5 class="col-4 ">
+                              Followers
+                            </h5>
+                            <h5 class="col-4 ">
+                              Spotify Link
+                            </h5>
+                          </div>
+                          <div class="row align-items-center">
+                            <div class="col-4 ">
+                              {{artist.popularity}}
+                            </div>
+                            <div class="col-4 ">
+                              {{artist.followers.total}}
+                            </div>
+                            <div class="col-4 ">
+                              <a [href]="artist.external_urls.spotify">
+                                <img class="icon" src="../assets/Spotify-Icon.png">
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                <br>
+                      <div class="row">
+                        <h5 class="col-12">
+                          Albums Featuring {{artist.name}}
+                        </h5>
+                      </div>
+                      <br>
+                
+                      <div class = "row">
+                        <div class="col-4">
+                          <ng-container *ngIf="albumsLoaded">
+                            <img class="album" [src]="albums[i][0]">
+                          </ng-container>
+                        </div>
+                        <div class="col-4">
+                          <ng-container *ngIf="albumsLoaded">
+                            <img class="album" [src]="albums[i][1]">
+                          </ng-container>
+                        </div>
+                        <div class="col-4">
+                          <ng-container *ngIf="albumsLoaded">
+                            <img class="album" [src]="albums[i][2]">
+                          </ng-container>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                  
+                </ng-container>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden"></span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden"></span>
+              </button>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden"></span>
-            </button>
-          </div>
+          </ng-container>
+          <ng-template #artistElse>
+            <h3>No Spotify data found</h3>
+          </ng-template>
         </mat-tab>
         <!-- <mat-tab label="Artist/Teams" class="container">
           

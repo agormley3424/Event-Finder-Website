@@ -581,20 +581,33 @@ export class SearchBoxComponent {
 
     let category = "";
 
-    category += this.rowGenre + ' | ';
+    if (this.rowGenre != "Undefined")
+    {
+      category += this.rowGenre + ' | ';
+    }
+      
 
+    if (this.rowSegment != "Undefined")
+    {
+      category += this.rowSegment + ' | ';
+    }
+    
 
-    category += this.rowSegment + ' | ';
+    if (this.rowSubGenre != "Undefined")
+    {
+      category += this.rowSubGenre + ' | ';
+    }
+    
 
-
-    category += this.rowSubGenre + ' | ';
-
-
-    category += this.rowType + ' | ';
-
-    category += this.rowSubType;
-
-
+    if (this.rowType != "Undefined")
+    {
+      category += this.rowType + ' | ';
+    }
+    
+    if (this.rowSubType != "Undefined")
+    {
+      category += this.rowSubType;
+    }
 
     const venue = this.venueName;
 

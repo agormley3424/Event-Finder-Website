@@ -25,8 +25,20 @@ h2 {
   width:80%;
 }
 
+h3 {
+  text-align:center;
+  margin-top: 300px;
+  margin-bottom: 300px;
+  padding-top:30px;
+  padding-bottom:30px;
+  background-color:rgb(61, 61, 61);
+  border-radius: 15px;
+}
+
 #heartButton {
   max-width: 45px;
+  max-height: 45px;
+  aspect-ratio: 1/1;
   border-radius: 100%;
 }
 
@@ -91,6 +103,8 @@ h5 {
 
 figcaption {
   color: white;
+  font-size:20pt;
+  font-weight:bold;
 }
 
 .modal-content {
@@ -110,6 +124,7 @@ figcaption {
 .icon {
   max-width: 40px;
   max-height: 40px;
+  aspect-ratio: 1 / 1;
 }
 
 #backButton {
@@ -135,10 +150,14 @@ figcaption {
   width: 2in;
   height: 2in;
   border-radius:5px;
+  aspect-ratio: 1 / 1;
 }
 
 .artistProfile {
-  width: 2.5in;
-  height: 2.5in;
+  display:block;
+  max-width: 2.5in;
+  max-height: 2.5in;
+  width: auto;
+  height: auto;
   border-radius:5px;
 }
