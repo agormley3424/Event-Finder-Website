@@ -122,8 +122,14 @@ async function searchTicketMaster(req, res)
 
   if (locationSearch == "true")
   {
-    var googleString = "https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyBmKpWW7k6eeEiJkccFLThjonWApR40Xis&address=";
-    googleString += req.query.location;
+    var googleString = "https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyDKkfBwag5d4vP1OXXbBBCNjceLG7IVk2Y&address=";
+    
+    let location = req.query.location.replaceAll(" ", "%20").replaceAll("+", "%2B").replaceAll(",", "");
+
+    googleString += location;
+
+    console.log("Google maps string: " + googleString);
+
     var googleAddy;
     //waiting = true;
     googleAddy = await axios.get(googleString);
