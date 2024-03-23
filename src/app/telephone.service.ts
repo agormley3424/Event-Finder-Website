@@ -107,35 +107,35 @@ export class TelephoneService {
     return returnAddress;
   }
 
-  public static autoLocationOn(http: HttpClient): any {
-    http.get("https://www.ipinfo.io?token=721bebb667bf09")
-    .subscribe((response) => {
-      //console.log(response);
-      //console.log(Object.values(response)[5]);
-      //this.ip = Object.values(response)[5];
-      //JSON.stringify(response);
-      console.log(TelephoneService.responseToJSON(response).loc);
+  // public static autoLocationOn(http: HttpClient): any {
+  //   http.get("https://www.ipinfo.io?token=721bebb667bf09")
+  //   .subscribe((response) => {
+  //     //console.log(response);
+  //     //console.log(Object.values(response)[5]);
+  //     //this.ip = Object.values(response)[5];
+  //     //JSON.stringify(response);
+  //     console.log(TelephoneService.responseToJSON(response).loc);
 
-      TelephoneService.ip = TelephoneService.responseToJSON(response).loc;
-      console.log(TelephoneService.ip);
-    })
-  }
+  //     TelephoneService.ip = TelephoneService.responseToJSON(response).loc;
+  //     console.log(TelephoneService.ip);
+  //   })
+  // }
 
-  public static autoLocationOff(): void {
-    TelephoneService.ip = null;
-  }
+  // public static autoLocationOff(): void {
+  //   TelephoneService.ip = null;
+  // }
 
   public static ticketMasterAuto(keyword: string, distance: number, category: string, http: HttpClient, caller: SearchBoxComponent): void {
-    if (TelephoneService.ip == null)
-    {
-      console.log("TelephoneService ticketMasterAuto Error: No ip is defined");
-    }
+    // if (TelephoneService.ip == null)
+    // {
+    //   console.log("TelephoneService ticketMasterAuto Error: No ip is defined");
+    // }
 
-    let stringDest= "https://hw8-380107.wl.r.appspot.com/ticketMaster?";
+    let stringDest= window.location.origin + "/ticketMaster?";
     stringDest += "keyword=" + keyword;
     stringDest += "&distance=" + distance.toString();
     stringDest += "&category=" + category;
-    stringDest += "&location=" + TelephoneService.ip;
+    // stringDest += "&location=" + TelephoneService.ip;
     stringDest += "&locationSearch=false";
 
     console.log("API Call: " + stringDest);
@@ -150,7 +150,7 @@ export class TelephoneService {
   }
 
   public static ticketMasterManual(keyword: string, distance: number, category: string, location: string, http: HttpClient,  caller: SearchBoxComponent): void {
-    let stringDest= "https://hw8-380107.wl.r.appspot.com/ticketMaster?";
+    let stringDest= window.location.origin + "/ticketMaster?";
     stringDest += "keyword=" + keyword;
     stringDest += "&distance=" + distance.toString();
     stringDest += "&category=" + category;
@@ -176,7 +176,7 @@ export class TelephoneService {
   public static getSpotify(artist: string, http: HttpClient, caller: SearchBoxComponent)
   {
     //console.log("enter getSpotify");
-    const stringDest= "https://hw8-380107.wl.r.appspot.com/spotify?artist=" + artist;
+    const stringDest= window.location.origin + "/spotify?artist=" + artist;
 
     http.get(stringDest)
     .subscribe((response) => {
@@ -205,7 +205,7 @@ export class TelephoneService {
   public static getAlbums(artistID: string, http: HttpClient, caller: SearchBoxComponent)
   {
     console.log("getAlbums called with ID " + artistID);
-    const stringDest= "https://hw8-380107.wl.r.appspot.com/spotifyAlbums?artistID=" + artistID;
+    const stringDest= window.location.origin + "/spotifyAlbums?artistID=" + artistID;
 
     caller.albums.push([]);
     const index = caller.albums.length - 1;

@@ -106,12 +106,12 @@ export class SearchBoxComponent {
 
   setIP(): void {
     //console.log("Calling setIP");
-    TelephoneService.autoLocationOn(this.phone.http);
+    // TelephoneService.autoLocationOn(this.phone.http);
     this.locationSearch = false;
   }
 
   unSetIP(): void {
-    TelephoneService.autoLocationOff();
+    // TelephoneService.autoLocationOff();
     this.locationSearch = true;
   }
 

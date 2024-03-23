@@ -24,7 +24,7 @@ const client_secret = 'e02e456718dc4029a7ccc17c53766917';
 var spotifyApi = new SpotifyWebApi({
   clientId: client_id,
   clientSecret: client_secret,
-  redirectUri: 'https://hw8-380107.wl.r.appspot.com/json'
+  redirectUri: 'https://event-finder-417906.wl.r.appspot.com/json'
 });
 
 function refreshToken()
@@ -89,7 +89,6 @@ function searchAlbums(artistID, req, res)
 
 //searchArtist("Cher", () => {});
 
-
 app.get('/spotify', (req, res) => { 
   //res.sendFile("Angular/my-app/src/app/app.component.html", {root:__dirname});
   //res.sendFile("dist/my-app", {root:__dirname});
@@ -143,27 +142,39 @@ async function searchTicketMaster(req, res)
     googleAddy = googleAddy.data;
     latitude = googleAddy["results"][0]["geometry"]["location"]["lat"];
     longitude = googleAddy["results"][0]["geometry"]["location"]["lng"];
-
   }
   else
   {
-    let ipAddy = req.query.location;
-    let returnAddresses = ["", ""];
-    let midIndex = -1;
+    let ipv4 = req.headers['x-forwarded-for'].split(", ");
 
-    for (let i = 0; i < ipAddy.length; i++)
-    {
-      if (ipAddy[i] == ',')
-      {
-        midIndex = i;
-        returnAddresses[0] = ipAddy.substring(0, i);
-        break;
-      }
-    }
 
-    returnAddresses[1] = ipAddy.substring(midIndex + 1);
-    latitude = returnAddresses[0];
-    longitude = returnAddresses[1];
+    // let ipAddy = req.query.location;
+    var ipString = "http://api.ipstack.com/"
+    + ipv4[0] + "?access_key=ac94c8269d57c9e41e868e4e334727f9";
+
+    console.log("IP String: " + ipString);
+
+    var ipJson = await axios.get(ipString);
+    ipJson = ipJson.data;
+
+    // var ipAddy = ipJson["loc"];
+
+    // let returnAddresses = ["", ""];
+    // let midIndex = -1;
+
+    // for (let i = 0; i < ipAddy.length; i++)
+    // {
+    //   if (ipAddy[i] == ',')
+    //   {
+    //     midIndex = i;
+    //     returnAddresses[0] = ipAddy.substring(0, i);
+    //     break;
+    //   }
+    // }
+
+    // returnAddresses[1] = ipAddy.substring(midIndex + 1);
+    latitude = ipJson["latitude"];
+    longitude = ipJson["longitude"];
   }
 
   //while (waiting) {};
@@ -185,6 +196,7 @@ async function searchTicketMaster(req, res)
   let keyword = req.query.keyword;
 
   var ticketMasterString = "https://app.ticketmaster.com/discovery/v2/events.json?" + "apikey=" + TMkey;
+  console.log("Ticketmaster API Call: " + ticketMasterString);
   ticketMasterString += "&keyword=" + keyword;
   ticketMasterString += "&segmentId=" + segmentID + "&radius=" + radius;
   ticketMasterString += "&unit=miles&geoPoint=" + geoPoint;
