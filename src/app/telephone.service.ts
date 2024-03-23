@@ -24,7 +24,7 @@ export class TelephoneService {
 
   public static initiate()
   {
-    console.log("initiation called");
+    // console.log("initiation called");
     this.favoriteTable = JSON.parse(localStorage.getItem("favoriteTable"));
 
     if (this.favoriteTable == null)
@@ -32,10 +32,10 @@ export class TelephoneService {
       this.favoriteTable = [];
     }
 
-    console.log("this.favoriteTable");
+    // console.log("this.favoriteTable");
 
-    console.log("favorite table initiated to");
-    console.log(this.favoriteTable);
+    // console.log("favorite table initiated to");
+    // console.log(this.favoriteTable);
   }
 
   public static favoriteTable = [];
@@ -138,14 +138,14 @@ export class TelephoneService {
     // stringDest += "&location=" + TelephoneService.ip;
     stringDest += "&locationSearch=false";
 
-    console.log("API Call: " + stringDest);
+    // console.log("API Call: " + stringDest);
 
     http.get(stringDest)
     .subscribe((response) => {
       //console.log(TelephoneService.responseToJSON(response));
       TelephoneService.ticketMasterJSON = TelephoneService.responseToJSON(response);
       caller.searchResults = TelephoneService.ticketMasterJSON._embedded.events;
-      console.log(caller.searchResults);
+      // console.log(caller.searchResults);
     })
   }
 
@@ -157,14 +157,14 @@ export class TelephoneService {
     stringDest += "&location=" + this.stringToAddress(location);
     stringDest += "&locationSearch=true";
 
-    console.log("API Call: " + stringDest);
+    // console.log("API Call: " + stringDest);
 
     http.get(stringDest)
     .subscribe((response) => {
       //console.log(TelephoneService.responseToJSON(response));
       TelephoneService.ticketMasterJSON = TelephoneService.responseToJSON(response);
       caller.searchResults = TelephoneService.ticketMasterJSON._embedded.events;
-      console.log(caller.searchResults);
+      // console.log(caller.searchResults);
     })
   }
 
@@ -204,7 +204,7 @@ export class TelephoneService {
 
   public static getAlbums(artistID: string, http: HttpClient, caller: SearchBoxComponent)
   {
-    console.log("getAlbums called with ID " + artistID);
+    // console.log("getAlbums called with ID " + artistID);
     const stringDest= window.location.origin + "/spotifyAlbums?artistID=" + artistID;
 
     caller.albums.push([]);

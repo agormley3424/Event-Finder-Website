@@ -95,9 +95,9 @@ export class SearchBoxComponent {
 
     //this.setTicketMasterManual();
 
-    console.log(this.searchResults);
-    console.log(this.searchResults[0].dates.start.localDate);
-    console.log(this.searchResults[0].dates.start.localTime);
+    // console.log(this.searchResults);
+    // console.log(this.searchResults[0].dates.start.localDate);
+    // console.log(this.searchResults[0].dates.start.localTime);
   }
 
   // clear(): void {
@@ -422,8 +422,8 @@ export class SearchBoxComponent {
       this.rowSeatmap = "https://upload.wikimedia.org/wikipedia/commons/d/d1/Image_not_available.png";
     }
 
-    console.log("Detailed Row: ");
-    console.log(this.detailRow);
+    // console.log("Detailed Row: ");
+    // console.log(this.detailRow);
 
     this.coordinates = {lat: parseFloat(TelephoneService.ticketMasterJSON._embedded.events[0]._embedded.venues[0].location.latitude),
     lng: parseFloat(TelephoneService.ticketMasterJSON._embedded.events[0]._embedded.venues[0].location.longitude)};
@@ -532,8 +532,8 @@ export class SearchBoxComponent {
     // }
 
 
-    console.log("Spotify artist array: ");
-    console.log(this.spotifyResult);
+    // console.log("Spotify artist array: ");
+    // console.log(this.spotifyResult);
 
     setTimeout(() => {
       this.getAlbums();
@@ -555,8 +555,8 @@ export class SearchBoxComponent {
 
     this.albumsLoaded = true;
 
-    console.log("Albums array: ");
-    console.log(this.albums);
+    // console.log("Albums array: ");
+    // console.log(this.albums);
   }
 
   flipHoursDetail()

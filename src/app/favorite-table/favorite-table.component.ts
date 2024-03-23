@@ -18,9 +18,9 @@ export class FavoriteTableComponent {
 
   public testFunc()
   {
-    console.log("Component list is ");
-    console.log(this.list);
-    console.log("Static list is ");
-    console.log(TelephoneService.favoriteTable);
+    // console.log("Component list is ");
+    // console.log(this.list);
+    // console.log("Static list is ");
+    // console.log(TelephoneService.favoriteTable);
   }
 }
